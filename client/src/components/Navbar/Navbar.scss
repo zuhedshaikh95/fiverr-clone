@@ -55,6 +55,7 @@
                     top: 50px;
                     right: 0;
                     padding: 20px;
+                    z-index: 2;
                     
                     color: var(--gray-color);
                     font-weight: 400;
@@ -91,10 +92,13 @@
     }
 
     .menu {
-        width: 95%;
-        padding: 10px;
-        display: flex;
-        justify-content: space-between;
+        width: 80%;
         color: var(--gray-color);
+
+        .menu-item {
+            padding: 10px 0;
+            cursor: pointer;
+            text-align: center;
+        }
     }
 }

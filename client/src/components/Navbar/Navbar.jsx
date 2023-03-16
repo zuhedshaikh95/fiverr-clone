@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Slider from 'react-slick';
+import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 import "./Navbar.scss";
+
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -32,9 +37,39 @@ const Navbar = () => {
     { path: '/', name: 'Digital Marketing' },
     { path: '/', name: 'Music & Audio' },
     { path: '/', name: 'Programming & Tech' },
-    { path: '/', name: 'Business' },
-    { path: '/', name: 'Lifestyle' },
   ];
+
+  const settings = {
+    infinite: true,
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    prevArrow: <GrFormPrevious />,
+    nextArrow: <GrFormNext />,
+    swipeToSlide: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  }
   
   return (
     <nav className={showMenu || pathname !== '/' ? 'navbar active' : 'navbar'}>
@@ -78,13 +113,15 @@ const Navbar = () => {
       </div>
       {(showMenu || pathname !== '/') && <>
         <hr />
-        <div className="menu">
+        <Slider className="menu" {...settings}>
           {
             menuLinks.map(({path, name}) => (
-              <Link className='link' to={path}>{name}</Link>
+              <div className="menu-item">
+                <Link className='link' to={path}>{name}</Link>
+              </div>
             ))
           }
-        </div>
+        </Slider>
       </>}
     </nav>
   );

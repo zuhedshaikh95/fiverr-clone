@@ -8,7 +8,7 @@ const Home = () => {
     <div>
       <Featured />
       <TrustedBy />
-      <Slide slidesToShow={5}>
+      <Slide>
         {
           cards.map((card) => (
             <Card key={card.id} data={card} />

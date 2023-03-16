@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Card.scss';
 
 const Card = (props) => {
-    const { data } = props;
+  const { data } = props;
 
   return (
     <Link to='/gigs?category=design'>
