@@ -1,0 +1,9 @@
+export { default as Home } from './Home/Home';
+export { default as Footer } from './Footer/Footer';
+export { default as Gig } from './Gig/Gig';
+export { default as Gigs } from './Gigs/Gigs';
+export { default as Orders } from './Orders/Orders';
+export { default as MyGigs } from './MyGigs/MyGigs';
+export { default as Add } from './Add/Add';
+export { default as Message } from './Message/Message';
+export { default as Messages } from './Messages/Messages';

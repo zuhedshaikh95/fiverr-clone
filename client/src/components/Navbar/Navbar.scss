@@ -1,0 +1,100 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1A1B1D;
+    color: #fff;
+    transition: 0.5s all ease;
+    position: sticky;
+    top: 0;
+
+    &.active {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .container {
+        width: 95%;
+         display: flex;
+         justify-content: space-between;
+         padding: 20px 30px;
+
+        .logo {
+            font-size: 34px;
+            font-weight: bold;
+            
+            .dot {
+                color: var(--green-color);
+            }
+        }
+
+        .links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-weight: 500;
+
+            .user {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                cursor: pointer;
+                position: relative;
+
+                img {
+                    width: 32px;
+                    height: 32px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+
+                .options {
+                    width: 200px;
+                    position: absolute;
+                    top: 50px;
+                    right: 0;
+                    padding: 20px;
+                    
+                    color: var(--gray-color);
+                    font-weight: 400;
+                    background-color: #fff;
+                    border: 1px solid lightgray;
+                    border-radius: 10px;
+                    transition: 0.5s all ease;
+
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+            }
+
+            button {
+                color: var(--white-color);
+                padding: 10px 20px;
+                border-radius: 5px;
+                border: 1px solid #fff;
+                cursor: pointer;
+                background-color: transparent;
+
+                &:hover {
+                    background-color: var(--green-color);
+                    border-color: var(--gray-color);
+                }
+            }
+        }
+    }
+
+    hr {
+        width: 100%;
+        border: .5px solid rgb(228, 227, 227);
+    }
+
+    .menu {
+        width: 95%;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        color: var(--gray-color);
+    }
+}

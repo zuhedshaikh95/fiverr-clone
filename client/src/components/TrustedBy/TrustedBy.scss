@@ -1,0 +1,25 @@
+.trustedBy {
+    background-color: #fafafa;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+
+    .container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        color: #b5b6ba;
+        font-weight: 600;
+
+        img {
+            height: 70px;
+            object-fit: contain;
+        }
+
+        @media screen and (max-width: 900px) {
+            gap: 30px;
+        }
+    }
+}
