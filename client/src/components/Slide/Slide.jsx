@@ -9,12 +9,12 @@ import "slick-carousel/slick/slick-theme.css";
 import './Slide.scss';
 
 const Slide = (props) => {
-  const { children } = props;
+  const { children, slidesToShow } = props;
 
   const settings = {
     infinite: true,
-    slidesToShow: 5,
-    slidesToScroll: 5,
+    slidesToShow: slidesToShow,
+    slidesToScroll: slidesToShow,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     swipeToSlide: true,

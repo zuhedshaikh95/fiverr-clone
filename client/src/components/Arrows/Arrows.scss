@@ -1,8 +1,8 @@
 svg {
     background-color: #fff;
     border: 1px solid #e4e5e7;
-    height: 35px;
-    width: 35px;
+    height: 30px;
+    width: 30px;
 
     display: flex;
     justify-content: center;
@@ -10,7 +10,6 @@ svg {
     border-radius: 50%;
 
     box-shadow: 0 0 8px rgba(0,0,0,.1);
-    font-size: 30px;
     padding: 5px;
     cursor: pointer;
 }
@@ -28,4 +27,8 @@ svg {
 
 .next {
     left: 98%;
+
+    @media screen and (max-width: 900px) {
+        left: 95%;
+    }
 }

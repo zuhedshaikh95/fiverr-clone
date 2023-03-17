@@ -1,0 +1,40 @@
+.projectContainer {
+    height: 320px;
+    cursor: pointer;
+    margin: 0 10px;
+    border-radius: 5px;
+    
+    img {
+        border-radius: 5px 5px 0 0;
+        width: 100%;
+        height: 70%;
+        object-fit: cover;
+    }
+    
+    .info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 15px;
+        box-shadow: 0 0.14px 2.29266px rgba(0,0,0,.032), 0 0.37px 4.42626px rgba(0,0,0,.048), 0 3px 7px rgba(0,0,0,.09);;
+        
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .text {
+            h2 {
+                font-size: 14px;
+                color: #404145;
+                line-height: 21px;
+                font-weight: 600; 
+            }
+            span {
+                font-size: 14px;
+
+            }
+        }
+    }
+}
