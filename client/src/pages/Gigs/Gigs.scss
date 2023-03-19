@@ -1,0 +1,109 @@
+.gigs {
+    display: flex;
+    justify-content: center;
+
+    .container {
+        width: 95%;
+        margin: auto;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .breadcrumbs {
+            font-weight: 300;
+            font-size: 13px;
+            color: #555;
+        }
+
+        p {
+            color: #999;
+            font-weight: 300;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .left {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: #555;
+                font-weight: 300;
+
+                input {
+                    padding: 5px;
+                    border: 1px solid lightgray;
+                    outline: none;
+
+                    &::placeholder {
+                        color: gray;
+                    }
+                }
+
+                button {
+                    background-color: var(--green-color);
+                    color: #fff;
+                    font-weight: 500;
+                    border: none;
+                    cursor: pointer;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                }
+            }
+
+            .right {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                position: relative;
+
+                .sortBy {
+                    color: #555;
+                    font-weight: 300;
+                }
+
+                .sortType {
+                    font-weight: 500;
+                }
+
+                img {
+                    width: 15px;
+                    cursor: pointer;
+                }
+
+                .rightMenu {
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 5px;
+                    border: .5px solid lightgrey;
+                    position: absolute;
+                    top: 30px;
+                    right: 0;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    color: #555;
+
+                    span {
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            @media screen and (max-width: 900px) {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    }
+}

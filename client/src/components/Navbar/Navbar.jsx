@@ -116,7 +116,7 @@ const Navbar = () => {
         <Slider className="menu" {...settings}>
           {
             menuLinks.map(({path, name}) => (
-              <div className="menu-item">
+              <div key={name} className="menu-item">
                 <Link className='link' to={path}>{name}</Link>
               </div>
             ))

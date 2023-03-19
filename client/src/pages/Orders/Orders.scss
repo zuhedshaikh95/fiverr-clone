@@ -1,0 +1,51 @@
+.orders {
+    display: flex;
+    justify-content: center;
+
+    .container {
+        width: 75%;
+        margin: auto;
+        padding: 50px 0px;
+
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        table {
+            width: 100%;
+
+            tr {
+                height: 50px;
+
+                th {
+                    text-align: left;
+                }
+
+                td {
+                    img {
+                        width: 50px;
+                        height: 25px;
+                        object-fit: cover;
+                    }
+                }
+
+                .message {
+                    width: 30px;
+                    height: 30px;
+                    // border-radius: 50%;
+                    cursor: pointer; 
+                }
+
+                &:nth-child(even) {
+                    background-color: #00ff620f;
+                }
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            width: 90%;
+        }
+    }
+}

@@ -1,0 +1,90 @@
+.message {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .container {
+        width: 75%;
+        margin: auto;
+
+        .breadcrumbs {
+            color: #555;
+        }
+
+        .messages {
+            margin: 30px 0;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 300px;
+            overflow-y: scroll;
+
+            .item {
+                display: flex;
+                gap: 20px;
+                max-width: 600px;
+
+                &.owner {
+                    flex-direction: row-reverse;
+                    align-self: flex-end;
+
+                    p {
+                        border-radius: 20px 0 20px 20px;
+                        background-color: #4169e1;
+                        color: #fff;
+                    }
+                }
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+                p {
+                    padding: 20px;
+                    background-color: #e4e3e3;
+                    border-radius: 0 20px 20px 20px;
+                    color: #3a3a3a;
+                }
+            }
+        }
+
+        hr {
+            width: 100%;
+            border: .5px solid #e9e8e8;
+            margin-bottom: 10px;
+        }
+    
+        .write {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            textarea {
+                width: 80%;
+                height: 100px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+            }
+
+            button {
+                background-color: var(--green-color);
+                padding: 20px;
+                color: #fff;
+                border: none;
+                font-weight: 500;
+                border-radius: 10px;
+                cursor: pointer;
+                width: 100px;
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            width: 90%;
+        }
+    }
+}

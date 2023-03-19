@@ -1,0 +1,65 @@
+.messages {
+    display: flex;
+    justify-content: center;
+
+    .container {
+        width: 75%;
+        margin: auto;
+        padding: 50px 0px;
+
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+
+            tr {
+                height: 80px;
+
+                th {
+                    text-align: left;
+                }
+
+                td {
+                    padding: 10px;
+
+                    &:first-child {
+                        font-weight: 500;
+                    }
+
+                    &:nth-child(2), &:nth-child(3) {
+                        color: gray;
+                    }
+                }
+
+                button {
+                    background-color: var(--green-color);
+                    color: #fff;
+                    padding: 10px;
+                    border: none;
+                    width: max-content;
+                    cursor: pointer;
+                }
+
+                .message {
+                    width: 30px;
+                    height: 30px;
+                    cursor: pointer; 
+                }
+
+                &.active {
+                    background-color: #00ff621a;
+                    border-bottom: 5px solid #fff;
+                }
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            width: 90%;
+        }
+    }
+}
