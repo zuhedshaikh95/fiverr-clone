@@ -1,8 +1,8 @@
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 
 import { Navbar } from './components';
-import { Home, Footer, Gig, Gigs, MyGigs, Add, Orders, Message, Messages } from './pages';
-import './App.scss';
+import { Home, Footer, Gig, Gigs, MyGigs, Add, Orders, Message, Messages, Login, Register } from './pages';
+import './App.scss'; 
 
 const paths = [
   { path: '/', element: <Home /> },
@@ -13,6 +13,8 @@ const paths = [
   { path: '/my-gigs', element: <MyGigs /> },
   { path: '/message/:id', element: <Message /> },
   { path: '/messages', element: <Messages /> },
+  { path: '/login', element: <Login /> },
+  { path: '/register', element: <Register /> },
 ];
 
 const Layout = () => {

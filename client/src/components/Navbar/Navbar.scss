@@ -75,13 +75,27 @@
                 color: var(--white-color);
                 padding: 10px 20px;
                 border-radius: 5px;
+                font-size: 14px;
                 border: 1px solid #fff;
                 cursor: pointer;
                 background-color: transparent;
-
+                
                 &:hover {
                     background-color: var(--green-color);
                     border-color: var(--gray-color);
+                }
+            }
+            
+            .join-active {
+                color: #1DBF73;
+                font-weight: 600;
+                font-size: 14px;
+                border: 1px solid #1DBF73;
+
+                &:hover {
+                    background-color: #1DBF73;
+                    border-color: #1DBF73;
+                    color: #fff;
                 }
             }
         }

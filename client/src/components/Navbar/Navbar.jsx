@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Slider from 'react-slick';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
+import { axiosFetch } from "../../utils";
 import "./Navbar.scss";
 
 import "slick-carousel/slick/slick.css"; 
@@ -11,6 +12,7 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showPanel, setShowPanel] = useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const isActive = () => {
     window.scrollY > 0 ? setShowMenu(true) : setShowMenu(false);
@@ -23,11 +25,7 @@ const Navbar = () => {
     }
   }, []);
 
-  const currentUser = {
-    id: 1,
-    username: 'Zuhed',
-    isSeller: true
-  }
+  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
 
   const menuLinks = [
     { path: '/', name: 'Graphics & Design' },
@@ -70,6 +68,17 @@ const Navbar = () => {
       }
     ]
   }
+
+  const handleLogout = async () => {
+    try {
+      await axiosFetch.post('/auth/logout');
+      localStorage.removeItem('currentUser');
+      navigate('/');
+    }
+    catch({response}) {
+      console.log(response.data);
+    }
+  }
   
   return (
     <nav className={showMenu || pathname !== '/' ? 'navbar active' : 'navbar'}>
@@ -85,12 +94,12 @@ const Navbar = () => {
           <span>Fiverr Business</span>
           <span>Explore</span>
           <span>English</span>
-          <span>Sign in</span>
+          <span><Link to='/login' className="link">Sign in</Link></span>
           {currentUser.isSeller && <span>Become a Seller</span>}
-          {!currentUser.username && <button>Join</button>}
-          {currentUser && (
+          {!currentUser.username && <button className={showMenu || pathname !== '/' ? 'join-active' : ''}><Link to='/register' className="link">Join</Link></button>}
+          {currentUser.username && (
             <div className="user" onClick={() => setShowPanel(!showPanel)}>
-              <img src="https://pps.whatsapp.net/v/t61.24694-24/323127423_193998219977054_9044585490817061228_n.jpg?stp=dst-jpg_s96x96&ccb=11-4&oh=01_AdSMTgNgIsdQCn6ith4BISu4_KjZ5MZw_MQYvZwIa08MWg&oe=641ECCF7" alt="" />
+              <img src={currentUser.image || './media/noavatar.png'} alt="" />
               <span>{currentUser?.username}</span>
               {showPanel && (
                 <div className="options">
@@ -104,7 +113,7 @@ const Navbar = () => {
                   }
                   <Link className="link" to='/orders'>Orders</Link>
                   <Link className="link" to='/messages'>Messages</Link>
-                  <Link className="link" to='/'>Logout</Link>
+                  <Link className="link" to='/' onClick={handleLogout}>Logout</Link>
                 </div>
               )}
             </div>
