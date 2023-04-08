@@ -1,9 +1,16 @@
 const express = require('express');
+const { createReview, getReview, deleteReview } = require('../controllers/review.controller');
+const { userMiddleware } = require('../middlewares');
 
 const app = express.Router();
 
-app.get('/', (request, response) => {
-    return response.send('Review')
-});
+// Create
+app.post('/', userMiddleware, createReview);
+
+// Get single
+app.get('/:gigID', userMiddleware, getReview);
+
+// Delete
+app.delete('/:_id', userMiddleware, deleteReview);
 
 module.exports = app;

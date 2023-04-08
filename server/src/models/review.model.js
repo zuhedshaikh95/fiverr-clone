@@ -2,15 +2,17 @@ const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
     gigID: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Gig',
         required: true
     },
     userID: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     star: {
-        type: String,
+        type: Number,
         required: true,
         max: 5
     },

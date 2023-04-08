@@ -1,17 +1,19 @@
 const mongoose = require('mongoose');
 
 const conversationSchema = new mongoose.Schema({
-    id: {
+    conversationID: {
         type: String,
         requied: true,
         unique: true
     },
     sellerID: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     buyerID: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     readBySeller: {

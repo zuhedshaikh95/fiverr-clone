@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
     gigID: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Gig',
         required: true,
     },
     image: {
@@ -18,11 +19,13 @@ const orderSchema = new mongoose.Schema({
         required: true,
     },
     sellerID: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true,
     },
     buyerID: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true,
     },
     isCompleted: {

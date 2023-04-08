@@ -99,7 +99,7 @@ const Navbar = () => {
           {!currentUser.username && <button className={showMenu || pathname !== '/' ? 'join-active' : ''}><Link to='/register' className="link">Join</Link></button>}
           {currentUser.username && (
             <div className="user" onClick={() => setShowPanel(!showPanel)}>
-              <img src={currentUser.image || './media/noavatar.png'} alt="" />
+              <img src={currentUser.image || '/media/noavatar.png'} alt="" />
               <span>{currentUser?.username}</span>
               {showPanel && (
                 <div className="options">

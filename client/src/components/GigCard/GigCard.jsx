@@ -6,18 +6,18 @@ const GigCard = (props) => {
     const { data } = props;
 
   return (
-    <Link to="/gig/123" className="link">
+    <Link to={`/gig/${data._id}`} className="link">
       <div className="gigCard">
-        <img src={data.img} alt="" />
+        <img src={data.cover} alt="" />
         <div className="info">
           <div className="user">
-            <img src={data.pp} alt="" />
-            <span>{data.username}</span>
+            <img src={data.userID.image || './media/noavatar.png'} alt="" />
+            <span>{data.userID.username}</span>
           </div>
-          <p>{data.desc}</p>
+          <p>{data.description}</p>
           <div className="star">
             <img src="./media/star.png" alt="" />
-            <span>{data.star}</span>
+            <span>{data.starNumber}</span>
           </div>
         </div>
         <hr />

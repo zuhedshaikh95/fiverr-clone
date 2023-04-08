@@ -1,4 +1,5 @@
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 
 import { Navbar } from './components';
 import { Home, Footer, Gig, Gigs, MyGigs, Add, Orders, Message, Messages, Login, Register } from './pages';
@@ -6,29 +7,29 @@ import './App.scss';
 
 const paths = [
   { path: '/', element: <Home /> },
-  { path: '/gig/:id', element: <Gig /> },
+  { path: '/gig/:_id', element: <Gig /> },
   { path: '/gigs', element: <Gigs /> },
   { path: '/orders', element: <Orders /> },
   { path: '/organize', element: <Add /> },
   { path: '/my-gigs', element: <MyGigs /> },
-  { path: '/message/:id', element: <Message /> },
+  { path: '/message/:_id', element: <Message /> },
   { path: '/messages', element: <Messages /> },
   { path: '/login', element: <Login /> },
   { path: '/register', element: <Register /> },
 ];
 
-const Layout = () => {
-  return (
-    <>
-      <Navbar />
-      <Outlet />
-      <Footer />
-    </>
-
-  )
-};
 
 function App() {
+  const queryClient = new QueryClient();
+  const Layout = () => {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <Navbar />
+        <Outlet />
+        <Footer />
+      </QueryClientProvider>
+    )
+  }
   const router = createBrowserRouter([
     {
       path: '/',

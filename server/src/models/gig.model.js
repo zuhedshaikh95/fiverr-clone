@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const gigSchema = new mongoose.Schema({
     userID: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
+        ref: 'User',
         required: true
     },
     title: {
@@ -20,9 +20,8 @@ const gigSchema = new mongoose.Schema({
         required: false
     },
     starNumber: {
-        type: String,
+        type: Number,
         default: 0,
-        max: 5,
         required: false
     },
     category: {

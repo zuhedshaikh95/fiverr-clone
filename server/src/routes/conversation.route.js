@@ -1,9 +1,19 @@
 const express = require('express');
+const { userMiddleware } = require('../middlewares');
+const { getConversations, createConversation, getSingleConversation, updateConversation } = require('../controllers/conversation.controller');
 
 const app = express.Router();
 
-app.get('/', (request, response) => {
-    return response.send('Conversation')
-});
+// Get all
+app.get('/', userMiddleware, getConversations);
+
+// Create
+app.post('/', userMiddleware, createConversation);
+
+// Get single
+app.get('/single/:conversationID', userMiddleware, getSingleConversation);
+
+// Update
+app.patch('/:conversationID', userMiddleware, updateConversation);
 
 module.exports = app;

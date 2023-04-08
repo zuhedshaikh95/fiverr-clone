@@ -1,0 +1,51 @@
+.reviews {
+    margin-top: 50px;
+
+    .add {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .addForm {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            textarea, select {
+                padding: 10px;
+            }
+
+            select {
+                width: 200px;
+                align-self: flex-end;
+
+                @media screen and (max-width: 900px) {
+                    width: 100%;
+                }
+            }
+
+            button {
+                align-self: flex-end;
+                width: 100px;
+                border: none;
+                padding: 10px;
+                color: #fff;
+                background-color: var(--green-color);
+                cursor: pointer;
+
+
+                @media screen and (max-width: 900px) {
+                    align-self: center;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    hr {
+        height: 0;
+        border: 0.5px solid lightgray;
+        margin: 50px 0px;
+    }
+}
