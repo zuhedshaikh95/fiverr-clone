@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosFetch } from '../../../utils';
+import toast from 'react-hot-toast';
 import './Login.scss';
 
 const initialState = {
@@ -26,10 +27,17 @@ const Login = () => {
     try {
       const { data } = await axiosFetch.post('/auth/login', formInput);
       localStorage.setItem('currentUser', JSON.stringify(data.user));
+      toast.success("Welcome back!", {
+        duration: 3000,
+        icon: "😃"
+      });
       navigate('/');
     }
-    catch({response}) {
-      setError(response.data.message);
+    catch ({ response: { data } }) {
+      setError(data.message);
+      toast.error(data.message, {
+        duration: 3000,
+      });
     }
   }
 

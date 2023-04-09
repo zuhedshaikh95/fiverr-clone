@@ -2,22 +2,22 @@ const { Conversation } = require('../models');
 const { CustomException } = require('../utils');
 
 const createConversation = async (request, response) => {
-    const { to } = request.body;
+    const { to, from } = request.body;
+
     try {
         const conversation = new Conversation({
-            conversationID: request.isSeller ? request.userID + to : to + request.userID,
             sellerID: request.isSeller ? request.userID : to,
-            buyerID: request.isSeller ? to : request.userID,
+            buyerID: request.isSeller ? from : request.userID,
             readBySeller: request.isSeller,
             readByBuyer: !request.isSeller
         });
 
-        console.log(conversation.conversationID);
         await conversation.save();
         return response.status(201).send(conversation);
     }
-    catch ({ message, status = 500 }) {
-        return response.status(status).send({
+    catch ({message, status = 500}) {
+        console.log(status);
+        return response.status(500).send({
             error: true,
             message
         })
@@ -26,7 +26,7 @@ const createConversation = async (request, response) => {
 
 const getConversations = async (request, response) => {
     try {
-        const conversation = await Conversation.find(request.isSeller ? { sellerID: request.userID } : { buyerID: request.userID }).populate(request.isSeller ? 'buyerID' : 'sellerID', 'username image email')
+        const conversation = await Conversation.find(request.isSeller ? { sellerID: request.userID } : { buyerID: request.userID }).populate(request.isSeller ? 'buyerID' : 'sellerID', 'username image email').sort({ updatedAt: -1 });
         return response.send(conversation);
     }
     catch ({ message, status = 500 }) {
@@ -38,9 +38,9 @@ const getConversations = async (request, response) => {
 }
 
 const getSingleConversation = async (request, response) => {
-    const { conversationID } = request.params;
+    const { sellerID, buyerID } = request.params;
     try {
-        const conversation = await Conversation.findOne({ conversationID })
+        const conversation = await Conversation.findOne({ sellerID, buyerID });
         if (!conversation) {
             throw CustomException('No such conversation found!', 404);
         }

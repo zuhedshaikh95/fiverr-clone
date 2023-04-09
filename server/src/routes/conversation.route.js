@@ -11,7 +11,7 @@ app.get('/', userMiddleware, getConversations);
 app.post('/', userMiddleware, createConversation);
 
 // Get single
-app.get('/single/:conversationID', userMiddleware, getSingleConversation);
+app.get('/single/:sellerID/:buyerID', userMiddleware, getSingleConversation);
 
 // Update
 app.patch('/:conversationID', userMiddleware, updateConversation);

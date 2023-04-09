@@ -22,25 +22,20 @@ const Orders = () => {
   const handleContact = async (order) => {
     const sellerID = order.sellerID;
     const buyerID = order.buyerID;
-    const conversationID = sellerID + buyerID;
 
-    try {
-      const { data } = await axiosFetch.get(`/conversations/single/${conversationID}`);
-      navigate(`/message/${data.conversation}`);
-    }
-    catch ({ response }) {
-      if (response.status === 404) {
-        try {
+    axiosFetch.get(`/conversations/single/${sellerID}/${buyerID}`)
+      .then(({ data }) => {
+        navigate(`/message/${data.conversationID}`);
+      })
+      .catch(async ({ response }) => {
+        if (response.status === 404) {
           const { data } = await axiosFetch.post('/conversations', {
-            to: currentUser.isSeller ? buyerID: sellerID
-          })
-          navigate(`/message/${data.conversation}`);
+            to: currentUser.isSeller ? buyerID : sellerID,
+            from: currentUser.isSeller ? sellerID : buyerID
+          });
+          navigate(`/message/${data.conversationID}`)
         }
-        catch ({ response }) {
-          console.log(response.data);
-        }
-      }
-    }
+      })
   }
 
   return (

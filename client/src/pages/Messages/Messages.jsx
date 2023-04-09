@@ -58,7 +58,7 @@ const Messages = () => {
                   {
                     data.map((conv) => (
                       <tr key={conv._id} className={((currentUser.isSeller && !conv.readBySeller) || (!currentUser.isSeller && !conv.readByBuyer)) &&
-                        "active"}>
+                        "active" || ''}>
                         <td>{currentUser.isSeller ? conv.buyerID.username : conv.sellerID.username}</td>
                         <td>
                           <Link className='link' to={`/message/${conv.conversationID}`}>

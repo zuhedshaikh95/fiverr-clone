@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const { v4: uuidv4 } = require('uuid');
 
 const conversationSchema = new mongoose.Schema({
     conversationID: {
         type: String,
-        requied: true,
+        default: uuidv4,
     },
     sellerID: {
         type: mongoose.Schema.Types.ObjectId,

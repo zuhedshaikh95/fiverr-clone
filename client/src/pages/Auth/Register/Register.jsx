@@ -22,7 +22,7 @@ const Register = () => {
 
     try {
       const { url } = await handleGenerateImageURL(image);
-      const { data } = await axiosFetch.post('/auth/register', {...formInput, image: url});
+      const { data } = await axiosFetch.post('/auth/register', {...formInput, image: url });
       console.log(data);
       navigate('/login');
     }

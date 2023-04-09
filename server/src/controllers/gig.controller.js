@@ -2,7 +2,6 @@ const { Gig } = require('../models');
 const { CustomException } = require('../utils');
 
 const createGig = async (request, response) => {
-    
     try {
 
         if(!request.isSeller) {
