@@ -4,31 +4,31 @@ const conversationSchema = new mongoose.Schema({
     conversationID: {
         type: String,
         requied: true,
-        unique: true
     },
     sellerID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: true,
     },
     buyerID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: true,
     },
     readBySeller: {
         type: Boolean,
-        required: true
+        required: true,
     },
     readByBuyer: {
         type: Boolean,
-        required: true
+        required: true,
     },
     lastMessage: {
         type: String,
-        required: false
+        required: false,
     }
 }, {
+    timestamps: true,
     versionKey: false
 });
 

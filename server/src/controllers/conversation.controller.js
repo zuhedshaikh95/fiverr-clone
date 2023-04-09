@@ -5,13 +5,14 @@ const createConversation = async (request, response) => {
     const { to } = request.body;
     try {
         const conversation = new Conversation({
-            id: request.isSeller ? request.userID + to : to + request.userID,
+            conversationID: request.isSeller ? request.userID + to : to + request.userID,
             sellerID: request.isSeller ? request.userID : to,
             buyerID: request.isSeller ? to : request.userID,
             readBySeller: request.isSeller,
             readByBuyer: !request.isSeller
         });
 
+        console.log(conversation.conversationID);
         await conversation.save();
         return response.status(201).send(conversation);
     }
@@ -25,7 +26,7 @@ const createConversation = async (request, response) => {
 
 const getConversations = async (request, response) => {
     try {
-        const conversation = await Conversation.find(request.isSeller ? { sellerID: request.userID } : { buyerID: request.userID });
+        const conversation = await Conversation.find(request.isSeller ? { sellerID: request.userID } : { buyerID: request.userID }).populate(request.isSeller ? 'buyerID' : 'sellerID', 'username image email')
         return response.send(conversation);
     }
     catch ({ message, status = 500 }) {
@@ -57,10 +58,10 @@ const updateConversation = async (request, response) => {
     const { conversationID } = request.params;
 
     try {
-        const conversation = await Conversation.findOneAndUpdate(conversationID, {
+        const conversation = await Conversation.findOneAndUpdate({ conversationID }, {
             $set: {
-                readBySeller: request.isSeller,
-                readByBuyer: !request.isSeller
+                readBySeller: true,
+                readByBuyer: true
             }
         }, { new: true });
 

@@ -12,7 +12,7 @@ const paths = [
   { path: '/orders', element: <Orders /> },
   { path: '/organize', element: <Add /> },
   { path: '/my-gigs', element: <MyGigs /> },
-  { path: '/message/:_id', element: <Message /> },
+  { path: '/message/:conversationID', element: <Message /> },
   { path: '/messages', element: <Messages /> },
   { path: '/login', element: <Login /> },
   { path: '/register', element: <Register /> },
