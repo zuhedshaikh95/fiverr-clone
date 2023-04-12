@@ -12,11 +12,16 @@ const Gigs = () => {
   const maxRef = useRef();
   const { search } = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ['gigs'],
     queryFn: () => 
-      axiosFetch.get(`/gigs${(search)}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sortBy}`)
+      axiosFetch.get(`/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sortBy}`)
       .then(({ data }) => {
+        console.log(data)
         return data;
       })
       .catch(({response}) => {
@@ -47,8 +52,8 @@ const Gigs = () => {
         <div className="menu">
           <div className="left">
             <span>Budget</span>
-            <input ref={minRef} type="text" placeholder='min' />
-            <input ref={maxRef} type="text" placeholder='max' />
+            <input ref={minRef} type="number" placeholder='min' />
+            <input ref={maxRef} type="number" placeholder='max' />
             <button onClick={handlePriceFilter}>Apply</button>
           </div>
           <div className="right">
@@ -65,7 +70,6 @@ const Gigs = () => {
             }
           </div>
         </div>
-
         <div className="cards">
           {
             isLoading

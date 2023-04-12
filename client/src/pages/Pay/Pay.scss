@@ -1,0 +1,12 @@
+.pay {
+    width: 600px;
+    margin: auto;
+
+    h2 {
+        margin: 20px 0 40px 0;
+    }
+
+    @media screen and (max-width: 900px) {
+        width: 90%;
+    }
+}

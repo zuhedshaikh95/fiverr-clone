@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { axiosFetch } from '../../../utils';
@@ -16,6 +16,10 @@ const Register = () => {
     isSeller: false,
     desc: "",
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const handleSubmit = async (event) => {
     event.preventDefault();

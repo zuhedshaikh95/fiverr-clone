@@ -2,7 +2,7 @@ import React from 'react';
 import { Slider } from 'infinite-react-carousel';
 import { useQuery } from '@tanstack/react-query';
 import { axiosFetch } from '../../utils';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Reviews } from '../../components';
 import './Gig.scss';
 
@@ -45,7 +45,7 @@ const Gig = () => {
                         new Array(Math.round(data.totalStars / data.starNumber))
                           .fill()
                           .map((item, i) => (
-                            <img src="/media/star.png" alt="" key={i} />
+                            <img src="/media/star.png" key={i} />
                           ))}
                       <span>{(data.totalStars / data.starNumber).toFixed(1)}</span>
                     </div>
@@ -94,7 +94,9 @@ const Gig = () => {
                       ))
                     }
                   </div>
-                  <button>Continue</button>
+                  <Link to={`/pay/${_id}`}>
+                    <button>Continue</button>
+                  </Link>
                 </div>
                 <h2>About This Gig</h2>
                 <p>
@@ -184,7 +186,9 @@ const Gig = () => {
                     ))
                   }
                 </div>
-                <button>Continue</button>
+                <Link to={`/pay/${_id}`}>
+                  <button>Continue</button>
+                </Link>
               </div>
             </div>
       }

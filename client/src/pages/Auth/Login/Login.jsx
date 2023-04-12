@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosFetch } from '../../../utils';
 import toast from 'react-hot-toast';
@@ -13,6 +13,10 @@ const Login = () => {
   const [formInput, setFormInput] = useState(initialState);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const handleFormInput = (event) => {
     const { value, name } = event.target;

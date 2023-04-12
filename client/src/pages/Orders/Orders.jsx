@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { axiosFetch } from '../../utils';
@@ -7,6 +7,11 @@ import './Orders.scss';
 const Orders = () => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const { isLoading, error, data } = useQuery({
     queryKey: ['orders'],
     queryFn: () =>

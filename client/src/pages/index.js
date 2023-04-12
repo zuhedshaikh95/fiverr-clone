@@ -9,3 +9,5 @@ export { default as Message } from './Message/Message';
 export { default as Messages } from './Messages/Messages';
 export { default as Login } from './Auth/Login/Login';
 export { default as Register } from './Auth/Register/Register';
+export { default as Pay } from './Pay/Pay';
+export { default as Success } from './Success/Success';

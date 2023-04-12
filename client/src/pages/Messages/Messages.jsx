@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { axiosFetch } from '../../utils';
@@ -8,6 +8,10 @@ import './Messages.scss';
 const Messages = () => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const { isLoading, error, data } = useQuery({
     queryKey: ['conversations'],

@@ -1,0 +1,13 @@
+.payment-form {
+    height: 60vh;
+    
+    button {
+        width: 100%;
+        margin: 30px 0;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: var(--green-color);
+        color: #fff;
+    }
+}
