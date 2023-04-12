@@ -69,7 +69,7 @@ const getGigs = async (request, response) => {
     try {
         const filters = {
             ...(userID && { userID }),
-            ...(category && { category }),
+            ...(category && { category: { $regex: category, $options: 'i' } }),
             ...(search && { title: { $regex: search, $options: 'i' } }),
             ...((min || max) && {
                 price: {
@@ -78,7 +78,7 @@ const getGigs = async (request, response) => {
                 },
             })
         }
-
+        
         const gigs = await Gig.find(filters).sort({ [sort]: -1 }).populate('userID', 'username image email');
         return response.send(gigs);
     }

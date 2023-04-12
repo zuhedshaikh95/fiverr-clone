@@ -11,9 +11,9 @@ app.post('/', userMiddleware, createGig);
 app.delete('/:_id', userMiddleware, deleteGig);
 
 // Get single
-app.get('/single/:_id', userMiddleware, getGig);
+app.get('/single/:_id', getGig);
 
 // Get all
-app.get('/', userMiddleware, getGigs);
+app.get('/', getGigs);
 
 module.exports = app;
