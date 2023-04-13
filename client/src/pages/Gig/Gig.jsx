@@ -6,6 +6,8 @@ import { Link, useParams } from 'react-router-dom';
 import { Reviews } from '../../components';
 import './Gig.scss';
 
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+
 const Gig = () => {
   const { _id } = useParams();
 
@@ -70,9 +72,7 @@ const Gig = () => {
                     <h2>$ {data?.price}</h2>
                   </div>
                   <p>
-                    {
-                      data?.shortDesc
-                    }
+                    {data?.shortDesc}
                   </p>
                   <div className="details">
                     <div className="item">
@@ -128,11 +128,11 @@ const Gig = () => {
                     <div className="items">
                       <div className="item">
                         <span className="title">From</span>
-                        <span className="desc">USA</span>
+                        <span className="desc">{data?.userID.country}</span>
                       </div>
                       <div className="item">
                         <span className="title">Member since</span>
-                        <span className="desc">Aug 2022</span>
+                        <span className="desc">{MONTHS[new Date(data?.userID.createdAt).getMonth()] + ' ' + new Date(data?.userID.createdAt).getFullYear()}</span>
                       </div>
                       <div className="item">
                         <span className="title">Avg. response time</span>
@@ -149,10 +149,10 @@ const Gig = () => {
                     </div>
                     <hr />
                     <p>
-                      My name is {data?.userID?.username}, I enjoy creating AI generated art in my spare
-                      time. I have a lot of experience using the AI program and that
-                      means I know what to prompt the AI with to get a great and
-                      incredibly detailed result.
+                      My name is {data?.userID?.username}, I have a lot of experience and passion when it comes to both concept art and illustrations I have the skill to quickly and easily help you bring your vision to life.
+                      To prompt research, I will use more advanced features from text weights.
+                      I will be as communicative as possible with you.
+                      On-time delivery.
                     </p>
                   </div>
                 </div>

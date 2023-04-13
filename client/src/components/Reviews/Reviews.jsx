@@ -2,6 +2,7 @@ import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Review from '../Review/Review';
 import { axiosFetch } from '../../utils';
+import toast from 'react-hot-toast';
 import './Reviews.scss';
 
 const Reviews = (props) => {
@@ -23,6 +24,12 @@ const Reviews = (props) => {
     const mutation = useMutation({
         mutationFn: (review) =>
             axiosFetch.post('/reviews', review)
+            .then(({data}) => {
+                return data;
+            })
+            .catch(({response}) => {
+                toast.error(response.data.message);
+            })
         ,
         onSuccess: () => {
             queryClient.invalidateQueries(['reviews'])

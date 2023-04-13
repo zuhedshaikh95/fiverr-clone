@@ -4,14 +4,14 @@ export const cards = [
       title: "AI Artists",
       desc: "Add talent to AI",
       img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_255,dpr_1.0/v1/attachments/generic_asset/asset/f27bec553efc12cc60baed89b8f2223e-1674661140708/ai-artists-2x.png",
-      slug: 'ai'
+      slug: 'ai',
     },
     {
       id: 2,
       title: "Logo Design",
       desc: "Build yor brand",
       img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_255,dpr_1.0/v1/attachments/generic_asset/asset/055f758c1f5b3a1ab38c047dce553860-1598561741678/logo-design-2x.png",
-      slug: 'design'
+      slug: 'design',
     },
     {
       id: 3,

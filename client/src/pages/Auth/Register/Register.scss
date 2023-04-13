@@ -42,6 +42,12 @@
           font-size: 18px;
           background-color: #1dbf73;
           cursor: pointer;
+
+          &:disabled {
+            background-color: gray;
+            color: #fff;
+            cursor: disabled;
+          }
         }
   
         .toggle {

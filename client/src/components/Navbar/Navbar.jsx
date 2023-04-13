@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Slider from 'react-slick';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
-import { axiosFetch } from "../../utils";
+import { axiosFetch, getCurrentUser } from "../../utils";
 import "./Navbar.scss";
 
 import "slick-carousel/slick/slick.css"; 
@@ -25,7 +25,7 @@ const Navbar = () => {
     }
   }, []);
 
-  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+  const currentUser = getCurrentUser();
 
   const menuLinks = [
     { path: '/', name: 'Graphics & Design' },
@@ -95,11 +95,11 @@ const Navbar = () => {
           <span>Explore</span>
           <span>English</span>
           <span><Link to='/login' className="link">Sign in</Link></span>
-          {currentUser.isSeller && <span>Become a Seller</span>}
+          {!currentUser.isSeller && <span>Become a Seller</span>}
           {!currentUser.username && <button className={showMenu || pathname !== '/' ? 'join-active' : ''}><Link to='/register' className="link">Join</Link></button>}
           {currentUser.username && (
             <div className="user" onClick={() => setShowPanel(!showPanel)}>
-              <img src={currentUser.image || '/media/noavatar.png'} alt="" />
+              <img src={currentUser.image || '/media/noavatar.png'} />
               <span>{currentUser?.username}</span>
               {showPanel && (
                 <div className="options">

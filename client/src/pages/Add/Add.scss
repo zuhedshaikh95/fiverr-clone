@@ -3,7 +3,7 @@
     justify-content: center;
 
     .container {
-        width: 95%;
+        width: 85%;
         margin: auto;
         padding: 50px 0;
 
@@ -33,6 +33,26 @@
                 input, select, textarea {
                     padding: 12px;
                 }
+
+                .images {
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+
+                    .imagesInput {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 20px;
+                    }
+
+                    button {
+                        &:disabled {
+                            color: white;
+                            background-color: gray;
+                            cursor: not-allowed;
+                        }
+                    }
+                }
                 
                 button {
                     border: none;
@@ -47,13 +67,38 @@
             }
 
             .right {
+                .add {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 20px;
 
+                    input {
+                        width: 80%;
+                    }
+                }
+
+                .addedFeatures {
+                    display: flex;
+                    gap: 20px;
+
+                    button {
+                        height: 30px;
+                        font-size: 12px;
+                        font-weight: 400;
+                        background-color: transparent;
+                        color: gray;
+                        border-radius: 10px;
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+                        border: 1px solid #ccc;
+                    }
+                }
             }
 
-            @media screen and (max-width: 600px) {
+            @media screen and (max-width: 900px) {
                 flex-direction: column-reverse;
             }
         }
-
     }
 }

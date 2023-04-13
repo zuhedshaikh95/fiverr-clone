@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { axiosFetch } from '../../../utils';
+import { axiosFetch, generateImageURL } from '../../../utils';
+import toast from 'react-hot-toast';
 import './Register.scss'
 
 const Register = () => {
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [formInput, setFormInput] = useState({
     username: "",
     email: "",
@@ -23,15 +24,18 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setLoading(true);
     try {
-      const { url } = await handleGenerateImageURL(image);
+      const { url } = await generateImageURL(image);
       const { data } = await axiosFetch.post('/auth/register', {...formInput, image: url });
-      console.log(data);
+      toast.success('Registration successful!');
+      setLoading(false);
       navigate('/login');
     }
-    catch({response}) {
-      console.log(response.data);
+    catch(error) {
+      console.log(error);
+      toast.error('Something went wrong! Try again.');
+      setLoading(false);
     }
   }
 
@@ -42,15 +46,6 @@ const Register = () => {
       ...formInput,
       [name]: inputValue
     });
-  }
-
-  const handleGenerateImageURL = async (image) => {
-    const file = new FormData();
-    file.append('file', image);
-    file.append('upload_preset', 'Fiverr');
-
-    const { data } = await axios.post('https://api.cloudinary.com/v1_1/dtrlrppzk/image/upload', file);
-    return data;
   }
 
   return (
@@ -83,7 +78,7 @@ const Register = () => {
             placeholder="India"
             onChange={handleChange}
           />
-          <button type="submit">Register</button>
+          <button type="submit" disabled={loading}>{loading ? 'Loading...' : 'Register'}</button>
         </div>
         <div className="right">
           <h1>I want to become a seller</h1>
