@@ -14,7 +14,7 @@ const createReview = async(request, response) => {
             star,
             description
         });
-        await Gig.findByIdAndUpdate(gigID, { $inc: { totalStars: star, starNumber: 1 } });
+        await Gig.findByIdAndUpdate(gigID, { $inc: { totalStars: star, starNumber: 1, sales: 1 } });
         await review.save();
 
         return response.status(201).send({

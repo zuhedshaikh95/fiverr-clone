@@ -62,7 +62,7 @@ const gigSchema = new mongoose.Schema({
     },
     sales: {
         type: Number,
-        required: true,
+        required: false,
         default: 0
     },
 }, {
