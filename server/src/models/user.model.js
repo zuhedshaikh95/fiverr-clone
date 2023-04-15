@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: false,
+        required: true,
     },
     isSeller: {
         type: Boolean,
