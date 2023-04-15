@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { axiosFetch, getCurrentUser } from '../../utils';
 import toast from 'react-hot-toast';
@@ -7,6 +7,7 @@ import './MyGigs.scss';
 
 const MyGigs = () => {
   const currentUser = getCurrentUser();
+  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
@@ -66,7 +67,7 @@ const MyGigs = () => {
                 <tbody>
                   {
                     data.map((gig) => (
-                      <tr key={gig._id}>
+                      <tr key={gig._id} onClick={() => navigate(`/gig/${gig._id}`)}>
                         <td>
                           <img
                             className="cover"

@@ -5,7 +5,7 @@ import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 import { axiosFetch, getCurrentUser } from "../../utils";
 import "./Navbar.scss";
 
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Navbar = () => {
@@ -28,13 +28,13 @@ const Navbar = () => {
   const currentUser = getCurrentUser();
 
   const menuLinks = [
-    { path: '/', name: 'Graphics & Design' },
-    { path: '/', name: 'Video & Animation' },
-    { path: '/', name: 'Writing & Translation' },
-    { path: '/', name: 'AI Services' },
-    { path: '/', name: 'Digital Marketing' },
-    { path: '/', name: 'Music & Audio' },
-    { path: '/', name: 'Programming & Tech' },
+    { path: '/gigs?category=design', name: 'Graphics & Design' },
+    { path: '/gigs?category=video', name: 'Video & Animation' },
+    { path: '/gigs?category=books', name: 'Writing & Translation' },
+    { path: '/gigs?category=ai', name: 'AI Services' },
+    { path: '/gigs?category=social', name: 'Digital Marketing' },
+    { path: '/gigs?category=voice', name: 'Music & Audio' },
+    { path: '/gigs?category=wordpress', name: 'Programming & Tech' },
   ];
 
   const settings = {
@@ -49,14 +49,14 @@ const Navbar = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
         }
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
         }
       },
       {
@@ -75,15 +75,15 @@ const Navbar = () => {
       localStorage.removeItem('currentUser');
       navigate('/');
     }
-    catch({response}) {
+    catch ({ response }) {
       console.log(response.data);
     }
   }
-  
+
   return (
     <nav className={showMenu || pathname !== '/' ? 'navbar active' : 'navbar'}>
       <div className="container">
-        <div className="logo"> 
+        <div className="logo">
           <Link to='/' className="link">
             <span className="text">fiverr</span>
           </Link>
@@ -91,11 +91,13 @@ const Navbar = () => {
         </div>
 
         <div className="links">
-          <span>Fiverr Business</span>
-          <span>Explore</span>
-          <span>English</span>
-          <span><Link to='/login' className="link">Sign in</Link></span>
-          {!currentUser.isSeller && <span>Become a Seller</span>}
+          <div className="menu-links">
+            <span>Fiverr Business</span>
+            <span>Explore</span>
+            <span>English</span>
+            <span><Link to='/login' className="link">Sign in</Link></span>
+            {!currentUser.isSeller && <span>Become a Seller</span>}
+          </div>
           {!currentUser.username && <button className={showMenu || pathname !== '/' ? 'join-active' : ''}><Link to='/register' className="link">Join</Link></button>}
           {currentUser.username && (
             <div className="user" onClick={() => setShowPanel(!showPanel)}>
@@ -124,7 +126,7 @@ const Navbar = () => {
         <hr />
         <Slider className="menu" {...settings}>
           {
-            menuLinks.map(({path, name}) => (
+            menuLinks.map(({ path, name }) => (
               <div key={name} className="menu-item">
                 <Link className='link' to={path}>{name}</Link>
               </div>
@@ -135,5 +137,5 @@ const Navbar = () => {
     </nav>
   );
 };
- 
+
 export default Navbar;

@@ -103,7 +103,11 @@
         .cards {
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 20px;
+            
+            @media screen and (max-width: 900px) {
+                justify-content: center;
+            }
         }
     }
 }

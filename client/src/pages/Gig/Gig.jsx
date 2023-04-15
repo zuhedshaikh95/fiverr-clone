@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Slider } from 'infinite-react-carousel';
 import { useQuery } from '@tanstack/react-query';
 import { axiosFetch } from '../../utils';
@@ -11,17 +11,22 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept'
 const Gig = () => {
   const { _id } = useParams();
 
-  const { isLoading, error, data, refetch } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ['gig'],
     queryFn: () =>
-      axiosFetch.get(`/gigs/single/${_id}`)
+        axiosFetch.get(`/gigs/single/${_id}`)
         .then(({ data }) => {
-          return data;
+          data.images.unshift(data.cover);
+            return data;
         })
         .catch(({ response }) => {
-          console.log(response.data);
+          console.log(response);
         })
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className="gig">
@@ -56,7 +61,7 @@ const Gig = () => {
                 </div>
                 <Slider slidesToShow={1} arrowsScroll={1} className="slider">
                   {
-                    data?.images?.map((img) => (
+                    data.images.map((img) => (
                       <img key={img} src={img} alt='' />
                     ))
                     ||
@@ -69,7 +74,11 @@ const Gig = () => {
                 <div className="right-mobile">
                   <div className="price">
                     <h3>{data?.shortTitle}</h3>
-                    <h2>$ {data?.price}</h2>
+                    <h2>{data?.price.toLocaleString('en-IN', {
+                      maximumFractionDigits: 0,
+                      style: 'currency',
+                      currency: 'INR',
+                    })}</h2>
                   </div>
                   <p>
                     {data?.shortDesc}
@@ -77,7 +86,7 @@ const Gig = () => {
                   <div className="details">
                     <div className="item">
                       <img src="/img/clock.png" alt="" />
-                      <span>{data.deliveryTime} Delivery</span>
+                      <span>{data.deliveryTime} days Delivery</span>
                     </div>
                     <div className="item">
                       <img src="/img/recycle.png" alt="" />
@@ -149,10 +158,7 @@ const Gig = () => {
                     </div>
                     <hr />
                     <p>
-                      My name is {data?.userID?.username}, I have a lot of experience and passion when it comes to both concept art and illustrations I have the skill to quickly and easily help you bring your vision to life.
-                      To prompt research, I will use more advanced features from text weights.
-                      I will be as communicative as possible with you.
-                      On-time delivery.
+                      {data.userID.description}
                     </p>
                   </div>
                 </div>
@@ -161,7 +167,11 @@ const Gig = () => {
               <div className="right">
                 <div className="price">
                   <h3>{data?.shortTitle}</h3>
-                  <h2>$ {data?.price}</h2>
+                  <h2>{data?.price.toLocaleString('en-IN', {
+                    maximumFractionDigits: 0,
+                    style: 'currency',
+                    currency: 'INR',
+                  })}</h2>
                 </div>
                 <p>
                   {data?.shortDesc}
@@ -169,7 +179,7 @@ const Gig = () => {
                 <div className="details">
                   <div className="item">
                     <img src="/img/clock.png" alt="" />
-                    <span>{data.deliveryTime} Delivery</span>
+                    <span>{data.deliveryTime} days Delivery</span>
                   </div>
                   <div className="item">
                     <img src="/img/recycle.png" alt="" />

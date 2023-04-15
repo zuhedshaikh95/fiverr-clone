@@ -3,13 +3,14 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { gigReducer, initialState } from '../../reducers/gigReducer';
 import { cards } from '../../data';
-import { axiosFetch, generateImageURL } from '../../utils';
+import { axiosFetch, generateImageURL, getCurrentUser } from '../../utils';
 import toast from 'react-hot-toast';
 import './Add.scss';
 
 const Add = () => {
+  const currentUser = getCurrentUser();
   const [state, dispatch] = useReducer(gigReducer, initialState);
-  const [coverImage, setCoverImage] = useState(undefined);
+  const [coverImage, setCoverImage] = useState(null);
   const [gigImages, setGigImages] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [disabled, setDisabled] = useState(false);
@@ -67,16 +68,18 @@ const Add = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-
-    for(let key in state) {
-      if(state[key] === '' || state[key].length === 0) {
-        toast.error('Please fill all input fields!');
+    const form = {...state, userID: currentUser._id}
+    for(let key in form) {
+      if(form[key] === '' || form[key].length === 0) {
+        toast.error('Please fill input field: ' + key);
         return;
       }
     }
     toast.success("Congratulations! You're on the market!")
-    mutation.mutate(state);
-    navigate('/my-gigs');
+    mutation.mutate(form);
+    setTimeout(() => {
+      navigate('/my-gigs');
+    }, 2000);
   }
 
   return (

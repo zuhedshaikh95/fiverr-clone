@@ -1,5 +1,5 @@
 export const initialState = {
-    userID: JSON.parse(localStorage.getItem('currentUser'))?._id,
+    userID: '',
     title: '',
     category: '',
     cover: '',
@@ -10,7 +10,7 @@ export const initialState = {
     deliveryTime: '',
     revisionNumber: '',
     features: [],
-    price: 0
+    price: 0,
 }
 
 export const gigReducer = (state, { type, payload }) => {

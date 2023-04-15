@@ -17,14 +17,14 @@
 
     .container {
         width: 95%;
-         display: flex;
-         justify-content: space-between;
-         padding: 20px 30px;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 30px;
 
         .logo {
             font-size: 34px;
             font-weight: bold;
-            
+
             .dot {
                 color: var(--green-color);
             }
@@ -35,6 +35,17 @@
             align-items: center;
             gap: 24px;
             font-weight: 500;
+
+            .menu-links {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                font-weight: 500;
+
+                @media screen and (max-width: 800px) {
+                    display: none;
+                }
+            }
 
             .user {
                 display: flex;
@@ -57,7 +68,7 @@
                     right: 0;
                     padding: 20px;
                     z-index: 2;
-                    
+
                     color: var(--gray-color);
                     font-weight: 400;
                     background-color: #fff;
@@ -79,13 +90,13 @@
                 border: 1px solid #fff;
                 cursor: pointer;
                 background-color: transparent;
-                
+
                 &:hover {
                     background-color: var(--green-color);
                     border-color: var(--gray-color);
                 }
             }
-            
+
             .join-active {
                 color: #1DBF73;
                 font-weight: 600;

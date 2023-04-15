@@ -8,6 +8,7 @@ import './Gigs.scss';
 const Gigs = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [sortBy, setSortBy] = useState('sales');
+  const [category, setCategory] = useState('.');
   const minRef = useRef();
   const maxRef = useRef();
   const { search } = useLocation();
@@ -21,11 +22,11 @@ const Gigs = () => {
     queryFn: () => 
       axiosFetch.get(`/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sortBy}`)
       .then(({ data }) => {
-        console.log(data)
+        setCategory(data[0].category);
         return data;
       })
       .catch(({response}) => {
-        console.log(response.data);
+        console.log(response);
       })
   })
 
@@ -46,9 +47,9 @@ const Gigs = () => {
   return (
     <div className='gigs'>
       <div className="container">
-        <span className="breadcrumbs">FIVERR GRAPHICS & DESIGN</span>
-        <h1>AI Artist</h1>
-        <p>Explore the boundaries of art and technology with Fiverr's AI artists</p>
+        <span className="breadcrumbs">FIVERR {category[0]?.toUpperCase() + category.slice(1)}</span>
+        <h1>{category[0]?.toUpperCase() + category.slice(1)}</h1>
+        <p>Explore the boundaries of art and technology with Fiverr's {category} artists</p>
         <div className="menu">
           <div className="left">
             <span>Budget</span>

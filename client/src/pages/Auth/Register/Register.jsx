@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { axiosFetch, generateImageURL } from '../../../utils';
 import toast from 'react-hot-toast';
 import './Register.scss'
@@ -12,10 +12,10 @@ const Register = () => {
     username: "",
     email: "",
     password: "",
-    image: "",
+    phone: '',
     country: "",
+    description: '',
     isSeller: false,
-    desc: "",
   });
 
   useEffect(() => {
@@ -24,6 +24,19 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    for(let key in formInput) {
+      if(formInput[key] === '') {
+        toast.error('Please fill all input field: ' + key);
+        console.log(formInput);
+        return;
+      }
+      else if(key === 'phone' && formInput[key].length < 9) {
+        toast.error('Enter valid phone number!');
+        return;
+      }
+    }
+
     setLoading(true);
     try {
       const { url } = await generateImageURL(image);
@@ -52,6 +65,9 @@ const Register = () => {
     <div className="register">
       <form onSubmit={handleSubmit}>
         <div className="left">
+          <p>Already have an account? <Link to='/login'>
+          Signin
+          </Link></p>
           <h1>Create a new account</h1>
           <label htmlFor="">Username</label>
           <input
@@ -99,7 +115,7 @@ const Register = () => {
           <label htmlFor="">Description</label>
           <textarea
             placeholder="A short description of yourself"
-            name="desc"
+            name="description"
             id=""
             cols="30"
             rows="10"

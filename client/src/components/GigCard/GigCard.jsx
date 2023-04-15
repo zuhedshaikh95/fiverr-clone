@@ -14,7 +14,7 @@ const GigCard = (props) => {
             <img src={data.userID.image || './media/noavatar.png'} alt="" />
             <span>{data.userID.username}</span>
           </div>
-          <p>{data.description}</p>
+          <p>{data.title}</p>
           <div className="star">
             <img src="./media/star.png" alt="" />
             <span>{data.starNumber}</span>
@@ -26,8 +26,11 @@ const GigCard = (props) => {
           <div className="price">
             <span>STARTING AT</span>
             <h2>
-              $ {data.price}
-              <sup>99</sup>
+              {data.price.toLocaleString('en-IN', {
+                maximumFractionDigits: 0,
+                style: 'currency',
+                currency: 'INR',
+              })}
             </h2>
           </div>
         </div>

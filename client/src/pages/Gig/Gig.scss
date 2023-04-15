@@ -246,6 +246,7 @@
       }
 
       button {
+        width: 100%;
         background-color: #1dbf73;
         padding: 10px;
         color: white;
@@ -253,6 +254,7 @@
         border: none;
         font-size: 18px;
         cursor: pointer;
+        border-radius: 5px;
       }
 
       @media screen and (max-width: 900px) {
