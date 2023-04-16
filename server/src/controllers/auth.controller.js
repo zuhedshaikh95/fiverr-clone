@@ -57,7 +57,7 @@ const authLogin = async (request, response) => {
             const token = jwt.sign({
                 _id: user._id,
                 isSeller: user.isSeller
-            }, JWT_SECRET, { expiresIn: '5 seconds' });
+            }, JWT_SECRET, { expiresIn: '7 days' });
 
             const serialised =  {
                 httpOnly: true,
