@@ -42,9 +42,12 @@ const Reviews = (props) => {
 
     const handleReviewSubmit = (event) => {
         event.preventDefault();
+
         const description = event.target[0].value;
         const star = event.target[1].value;
-        mutation.mutate({ gigID, description, star })
+        mutation.mutate({ gigID, description, star });
+
+        event.target.reset();
     }
 
     return (

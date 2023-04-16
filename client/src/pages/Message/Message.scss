@@ -73,6 +73,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 20px;
 
             textarea {
                 width: 80%;
@@ -80,6 +81,10 @@
                 padding: 10px;
                 border: 1px solid #ccc;
                 border-radius: 10px;
+
+                @media screen and (max-width: 900px) {
+                    height: 40px;
+                }
             }
 
             button {
@@ -91,6 +96,10 @@
                 border-radius: 10px;
                 cursor: pointer;
                 width: 100px;
+
+                @media screen and (max-width: 600px) {
+                    padding: 15px;
+                }
             }
         }
 

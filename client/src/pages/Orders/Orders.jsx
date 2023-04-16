@@ -75,7 +75,11 @@ const Orders = () => {
                           />
                         </td>
                         <td>{order.title}</td>
-                        <td>{order.price}</td>
+                        <td>{order.price.toLocaleString('en-IN', {
+                          maximumFractionDigits: 0,
+                          style: 'currency',
+                          currency: 'INR',
+                        })}</td>
                         <td>
                           <img className='message' src="./media/message.png" alt="message" onClick={() => handleContact(order)} />
                         </td>
