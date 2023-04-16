@@ -1,13 +1,14 @@
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import Review from '../Review/Review';
-import { axiosFetch } from '../../utils';
+import { axiosFetch, userLogout } from '../../utils';
 import toast from 'react-hot-toast';
 import './Reviews.scss';
 
 const Reviews = (props) => {
     const { gigID } = props;
-
+    const navigation = useNavigate();
     const queryClient = useQueryClient();
     const { isLoading, error, data, refetch } = useQuery({
         queryKey: ['reviews'],
@@ -27,8 +28,11 @@ const Reviews = (props) => {
             .then(({data}) => {
                 return data;
             })
-            .catch(({response}) => {
-                toast.error(response.data.message);
+            .catch(({ response: { data } }) => {
+                if(data.message == 'jwt expired') {
+                    userLogout();
+                    navigation('/login');
+                }
             })
         ,
         onSuccess: () => {
