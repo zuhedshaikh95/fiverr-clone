@@ -40,5 +40,10 @@
         color: red;
         font-size: 14px;
       }
+
+      @media screen and (max-width: 600px) {
+        width: 80%;
+        margin: auto;
+      }
     }
   }
