@@ -8,7 +8,7 @@ const app = express.Router();
 app.post('/', userMiddleware, createReview);
 
 // Get single
-app.get('/:gigID', userMiddleware, getReview);
+app.get('/:gigID', getReview);
 
 // Delete
 app.delete('/:_id', userMiddleware, deleteReview);
