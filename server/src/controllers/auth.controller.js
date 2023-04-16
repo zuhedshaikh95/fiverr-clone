@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { CustomException } = require('../utils');
 const saltRounds = 10;
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, NODE_ENV } = process.env;
 
 const authRegister = async (request, response) => {
     const { username, email, password, country, image, isSeller, description } = request.body;
@@ -59,7 +59,15 @@ const authLogin = async (request, response) => {
                 isSeller: user.isSeller
             }, JWT_SECRET, { expiresIn: '7 days' });
 
-            return response.cookie('accessToken', token, { httpOnly: true })
+            const serialised =  {
+                httpOnly: true,
+                secure: NODE_ENV === "production",
+                sameSite: "strict",
+                maxAge: 60 * 60 * 24 * 30,
+                path: "/",
+              }
+
+            return response.cookie('accessToken', token, serialised)
             .status(202).send({
                 error: false,
                 message: 'Success!',
@@ -79,7 +87,7 @@ const authLogin = async (request, response) => {
 
 const authLogout = async (request, response) => {
     return response.clearCookie('accessToken', {
-        sameSite: 'none',
+        sameSite: 'strict',
         secure: true
     })
     .send({
