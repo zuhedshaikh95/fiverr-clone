@@ -61,12 +61,10 @@ const authLogin = async (request, response) => {
 
             const serialised =  {
                 httpOnly: true,
-                secure: true,
-                sameSite: 'none',
+                secure: NODE_ENV === 'production',
+                sameSite: 'strict',
                 path: '/',
               };
-
-            console.log(serialised);
 
             return response.cookie('accessToken', token, serialised)
             .status(202).send({
