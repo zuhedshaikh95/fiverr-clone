@@ -25,13 +25,12 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    for(let key in formInput) {
-      if(formInput[key] === '') {
+    for (let key in formInput) {
+      if (formInput[key] === '') {
         toast.error('Please fill all input field: ' + key);
-        console.log(formInput);
         return;
       }
-      else if(key === 'phone' && formInput[key].length < 9) {
+      else if (key === 'phone' && formInput[key].length < 9) {
         toast.error('Enter valid phone number!');
         return;
       }
@@ -40,14 +39,13 @@ const Register = () => {
     setLoading(true);
     try {
       const { url } = await generateImageURL(image);
-      const { data } = await axiosFetch.post('/auth/register', {...formInput, image: url });
+      const { data } = await axiosFetch.post('/auth/register', { ...formInput, image: url });
       toast.success('Registration successful!');
       setLoading(false);
       navigate('/login');
     }
-    catch(error) {
-      console.log(error);
-      toast.error('Something went wrong! Try again.');
+    catch ({ response }) {
+      toast.error(response.data.message);
       setLoading(false);
     }
   }
@@ -65,9 +63,6 @@ const Register = () => {
     <div className="register">
       <form onSubmit={handleSubmit}>
         <div className="left">
-          <p>Already have an account? <Link to='/login'>
-          Signin
-          </Link></p>
           <h1>Create a new account</h1>
           <label htmlFor="">Username</label>
           <input
@@ -97,6 +92,7 @@ const Register = () => {
           <button type="submit" disabled={loading}>{loading ? 'Loading...' : 'Register'}</button>
         </div>
         <div className="right">
+          <p>Already have an account? <Link to='/login'>Signin</Link></p>
           <h1>I want to become a seller</h1>
           <div className="toggle">
             <label htmlFor="">Activate the seller account</label>

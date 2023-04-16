@@ -52,18 +52,19 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px 0;
-
+            
             .left {
                 display: flex;
                 align-items: center;
                 gap: 20px;
-
+                
                 span {
                     font-size: 13px;
                 }
             }
             .right {
                 display: flex;
+                flex-wrap: wrap;
                 align-items: center;
                 gap: 30px;
 

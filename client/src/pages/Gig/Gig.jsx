@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { axiosFetch } from '../../utils';
 import { Link, useParams } from 'react-router-dom';
 import { Reviews } from '../../components';
+import toast from 'react-hot-toast';
 import './Gig.scss';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
@@ -20,7 +21,7 @@ const Gig = () => {
             return data;
         })
         .catch(({ response }) => {
-          console.log(response);
+          toast.error(response.data.message);
         })
   });
 

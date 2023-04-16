@@ -21,7 +21,7 @@ const Featured = () => {
           <div className="search">
             <div className="searchInput">
               <img src="./media/search.png" alt="search" />
-              <input type="search" placeholder='Try "building mobile app"' onChange={(({ target: { value } }) => setSearch(value))} />
+              <input type="search" placeholder='Try "website"' onChange={(({ target: { value } }) => setSearch(value))} />
             </div>
             <button onClick={handleSearch}>Search</button>
           </div>

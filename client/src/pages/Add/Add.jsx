@@ -24,6 +24,12 @@ const Add = () => {
   const mutation = useMutation({
     mutationFn: (gig) =>
       axiosFetch.post('/gigs', gig)
+      .then(({data}) => {
+        return data;
+      })
+      .catch(({response}) => {
+        toast.error(response.data.message);
+      })
     ,
     onSuccess: () => 
       queryClient.invalidateQueries(['my-gigs'])
@@ -60,8 +66,8 @@ const Add = () => {
       setUploading(false);
       setDisabled(true);
     }
-    catch ({ message }) {
-      console.log(message);
+    catch (error) {
+      console.log(error);
       setUploading(false);
     }
   }

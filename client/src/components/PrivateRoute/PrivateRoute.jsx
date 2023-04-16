@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { Navigate, useLocation } from 'react-router-dom';
+import { getCurrentUser } from '../../utils';
 
 const PrivateRoute = ({ children }) => {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || false;
+  const currentUser = getCurrentUser();
   const { pathname } = useLocation();
 
   return (currentUser) ? (

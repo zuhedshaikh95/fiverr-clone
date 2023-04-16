@@ -12,9 +12,19 @@
         color: #b5b6ba;
         font-weight: 600;
 
+        span {
+            @media screen and (max-width: 600px) {
+                display: none;
+            }
+        }
+
         img {
             height: 70px;
             object-fit: contain;
+
+            @media screen and (max-width: 600px) {
+                height: 35px;
+            }
         }
 
         @media screen and (max-width: 900px) {

@@ -33,10 +33,15 @@
                 color: #555;
                 font-weight: 300;
 
+                @media screen and (max-width: 600px) {
+                    flex-direction: column;
+                }
+
                 input {
                     padding: 5px;
                     border: 1px solid lightgray;
                     outline: none;
+                    width: 100%;
 
                     &::placeholder {
                         color: gray;
@@ -95,7 +100,6 @@
 
             @media screen and (max-width: 900px) {
                 flex-direction: column;
-                align-items: flex-start;
                 gap: 20px;
             }
         }
@@ -105,7 +109,7 @@
             flex-wrap: wrap;
             gap: 20px;
             
-            @media screen and (max-width: 900px) {
+            @media screen and (max-width: 600px) {
                 justify-content: center;
             }
         }

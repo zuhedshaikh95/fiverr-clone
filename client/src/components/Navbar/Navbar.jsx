@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Navbar = () => {
+  const currentUser = getCurrentUser();
   const [showMenu, setShowMenu] = useState(false);
   const [showPanel, setShowPanel] = useState(false);
   const { pathname } = useLocation();
@@ -25,7 +26,6 @@ const Navbar = () => {
     }
   }, []);
 
-  const currentUser = getCurrentUser();
 
   const menuLinks = [
     { path: '/gigs?category=design', name: 'Graphics & Design' },
@@ -40,7 +40,7 @@ const Navbar = () => {
   const settings = {
     infinite: true,
     slidesToShow: 6,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     prevArrow: <GrFormPrevious />,
     nextArrow: <GrFormNext />,
     swipeToSlide: true,
@@ -49,21 +49,18 @@ const Navbar = () => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 2,
         }
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 2,
         }
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1
         }
       }
     ]
@@ -95,9 +92,9 @@ const Navbar = () => {
             <span>Fiverr Business</span>
             <span>Explore</span>
             <span>English</span>
-            <span><Link to='/login' className="link">Sign in</Link></span>
             {!currentUser.isSeller && <span>Become a Seller</span>}
           </div>
+          {!currentUser && <span><Link to='/login' className="link">Sign in</Link></span>}
           {!currentUser.username && <button className={showMenu || pathname !== '/' ? 'join-active' : ''}><Link to='/register' className="link">Join</Link></button>}
           {currentUser.username && (
             <div className="user" onClick={() => setShowPanel(!showPanel)}>

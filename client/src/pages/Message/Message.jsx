@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { axiosFetch } from '../../utils';
 import { Link, useParams } from "react-router-dom";
+import toast from 'react-hot-toast';
 import "./Message.scss";
 
 const Message = () => {
@@ -17,11 +18,10 @@ const Message = () => {
     queryFn: () =>
       axiosFetch.get(`/messages/${conversationID}`)
         .then(({ data }) => {
-          console.log(data);
           return data;
         })
         .catch(({ response }) => {
-          console.log(response.data);
+          toast.error(response.data.message)
         })
   });
   

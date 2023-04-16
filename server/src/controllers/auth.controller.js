@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { CustomException } = require('../utils');
 const saltRounds = 10;
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET, NODE_ENV } = process.env;
 
 const authRegister = async (request, response) => {
     const { username, email, password, country, image, isSeller, description } = request.body;
@@ -61,7 +61,7 @@ const authLogin = async (request, response) => {
 
             const serialised =  {
                 httpOnly: true,
-                secure: true,
+                secure: NODE_ENV === 'production',
                 sameSite: "none",
                 path: "/",
               };

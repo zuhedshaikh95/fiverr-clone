@@ -18,7 +18,6 @@ const Messages = () => {
     queryFn: () =>
       axiosFetch.get('/conversations')
         .then(({ data }) => {
-          console.log(data);
           return data;
         })
         .catch(({ response }) => {

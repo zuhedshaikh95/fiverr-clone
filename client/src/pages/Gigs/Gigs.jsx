@@ -14,21 +14,26 @@ const Gigs = () => {
   const { search } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
+
 
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ['gigs'],
-    queryFn: () => 
+    queryFn: () =>
       axiosFetch.get(`/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sortBy}`)
-      .then(({ data }) => {
-        setCategory(data[0].category);
-        return data;
-      })
-      .catch(({response}) => {
-        console.log(response);
-      })
-  })
+        .then(({ data }) => {
+          setCategory(data[0].category);
+          return data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+  });
+  
+  useEffect(() => {
+    refetch();
+  }, [sortBy, search]);
 
   const handleSortBy = (type) => {
     setSortBy(type);
@@ -39,10 +44,6 @@ const Gigs = () => {
   const handlePriceFilter = () => {
     refetch();
   }
-
-  useEffect(() => {
-    refetch();
-  }, [sortBy]);
 
   return (
     <div className='gigs'>
@@ -74,10 +75,10 @@ const Gigs = () => {
         <div className="cards">
           {
             isLoading
-            ? '...loading'
-            : error
-            ? 'Something went wrong!'
-            : data.map((gig) => <GigCard key={gig._id} data={gig} />)
+              ? '...loading'
+              : error
+                ? 'Something went wrong!'
+                : data.map((gig) => <GigCard key={gig._id} data={gig} />)
           }
         </div>
       </div>
