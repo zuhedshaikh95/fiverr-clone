@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
 
 import { Navbar, PrivateRoute } from './components';
-import { Home, Footer, Gig, Gigs, MyGigs, Add, Orders, Message, Messages, Login, Register, Pay, Success } from './pages';
+import { Home, Footer, Gig, Gigs, MyGigs, Add, Orders, Message, Messages, Login, Register, Pay, Success, NotFound } from './pages';
 import './App.scss';
 
 const paths = [
@@ -19,6 +19,7 @@ const paths = [
   { path: '/messages', element: <PrivateRoute><Messages /></PrivateRoute> },
   { path: '/pay/:_id', element: <PrivateRoute><Pay /></PrivateRoute> },
   { path: '/success', element: <PrivateRoute><Success /></PrivateRoute> },
+  { path: '*', element: <NotFound /> }
 ];
 
 

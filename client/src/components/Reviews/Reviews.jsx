@@ -33,6 +33,7 @@ const Reviews = (props) => {
                     userLogout();
                     navigation('/login');
                 }
+                toast.error(data.message);
             })
         ,
         onSuccess: () => {
@@ -45,9 +46,11 @@ const Reviews = (props) => {
 
         const description = event.target[0].value;
         const star = event.target[1].value;
-        mutation.mutate({ gigID, description, star });
-
-        event.target.reset();
+        
+        if(star && description) {
+            mutation.mutate({ gigID, description, star });
+            event.target.reset();
+        }
     }
 
     return (

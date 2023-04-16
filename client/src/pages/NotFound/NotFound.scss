@@ -1,0 +1,38 @@
+.notFound {
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .container {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+        h1 {
+            color: #ED0331;
+            font-size: 3.75rem;
+            font-weight: 800;
+
+            @media screen and (max-width: 900px) {
+                font-size: 2.5rem;
+            }
+        }
+
+        .text {
+            h2 {
+                color: #1A202C;
+                font-size: 2rem;
+                font-weight: 800;
+
+                @media screen and (max-width: 900px) {
+                    font-size: 1.5rem;
+                }
+            }
+
+            p {
+                padding: 5px 0;
+            }
+        }
+    }
+}
