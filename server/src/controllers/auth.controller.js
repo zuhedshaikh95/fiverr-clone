@@ -62,7 +62,7 @@ const authLogin = async (request, response) => {
             const serialised =  {
                 httpOnly: true,
                 secure: NODE_ENV === 'production',
-                sameSite: 'lax',
+                sameSite: NODE_ENV === 'production' ? 'none' : 'strict',
                 path: '/',
               };
 
