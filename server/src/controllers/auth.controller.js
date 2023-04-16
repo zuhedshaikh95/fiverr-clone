@@ -62,7 +62,7 @@ const authLogin = async (request, response) => {
             const serialised =  {
                 httpOnly: true,
                 secure: true,
-                sameSite: "strict",
+                sameSite: "none",
                 path: "/",
               };
 
