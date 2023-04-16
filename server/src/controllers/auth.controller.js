@@ -63,7 +63,6 @@ const authLogin = async (request, response) => {
                 httpOnly: true,
                 secure: NODE_ENV === "production",
                 sameSite: "strict",
-                maxAge: 60 * 60 * 24 * 30,
                 path: "/",
               }
 
