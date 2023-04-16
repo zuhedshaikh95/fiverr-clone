@@ -57,14 +57,16 @@ const authLogin = async (request, response) => {
             const token = jwt.sign({
                 _id: user._id,
                 isSeller: user.isSeller
-            }, JWT_SECRET, { expiresIn: '7 days' });
+            }, JWT_SECRET, { expiresIn: '5 seconds' });
 
             const serialised =  {
                 httpOnly: true,
-                secure: NODE_ENV === 'production',
-                sameSite: "none",
-                path: "/",
+                secure: true,
+                sameSite: 'none',
+                path: '/',
               };
+
+            console.log(serialised);
 
             return response.cookie('accessToken', token, serialised)
             .status(202).send({

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { CustomException } = require('../utils');
+const { authLogout } = require('../controllers/auth.controller');
 const { JWT_SECRET } = process.env;
 
 const userMiddleware = (request, response, next) => {
@@ -18,6 +19,7 @@ const userMiddleware = (request, response, next) => {
             return next();
         }
         
+        authLogout(request, response);
         throw CustomException('Unauthorized access!', 400);
     }
     catch({message, status = 500}) {
