@@ -16,7 +16,6 @@ const createConversation = async (request, response) => {
         return response.status(201).send(conversation);
     }
     catch ({message, status = 500}) {
-        console.log(status);
         return response.status(500).send({
             error: true,
             message

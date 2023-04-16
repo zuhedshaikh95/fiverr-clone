@@ -34,7 +34,7 @@ const getReview = async (request, response) => {
     const { gigID } = request.params;
     
     try {
-        const reviews = await Review.find({ gigID }).populate('userID', 'username image email');
+        const reviews = await Review.find({ gigID }).populate('userID', 'username image email country');
         return response.status(201).send(reviews);
     }
     catch({message, status = 500}) {

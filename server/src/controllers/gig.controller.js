@@ -4,7 +4,7 @@ const { CustomException } = require('../utils');
 const createGig = async (request, response) => {
     try {
 
-        if(!request.isSeller) {
+        if (!request.isSeller) {
             throw CustomException('Only sellers can create new Gigs!', 403);
         }
 
@@ -15,7 +15,7 @@ const createGig = async (request, response) => {
         await gig.save();
         return response.status(201).send(gig);
     }
-    catch({ message, status = 500 }) {
+    catch ({ message, status = 500 }) {
         return response.status(status).send({
             error: true,
             message
@@ -28,7 +28,7 @@ const deleteGig = async (request, response) => {
 
     try {
         const gig = await Gig.findOne({ _id });
-        if(request.userID === gig.userID.toString()) {
+        if (request.userID === gig.userID.toString()) {
             await Gig.deleteOne({ _id });
             return response.send({
                 error: false,
@@ -38,7 +38,7 @@ const deleteGig = async (request, response) => {
 
         throw CustomException('Invalid request! Cannot delete other user gigs!', 403);
     }
-    catch({message, status = 500}) {
+    catch ({ message, status = 500 }) {
         return response.status(status).send({
             error: true,
             message
@@ -51,12 +51,12 @@ const getGig = async (request, response) => {
 
     try {
         const gig = await Gig.findOne({ _id }).populate('userID', 'username country image createdAt email description');
-        if(!gig) {
+        if (!gig) {
             throw CustomException('Gig not found!', 404);
         }
         return response.send(gig);
     }
-    catch({message, status = 500}) {
+    catch ({ message, status = 500 }) {
         return response.status(status).send({
             error: true,
             message
@@ -65,7 +65,7 @@ const getGig = async (request, response) => {
 }
 
 const getGigs = async (request, response) => {
-    const { category, search, max, min, userID, sort} = request.query;
+    const { category, search, max, min, userID, sort } = request.query;
     try {
         const filters = {
             ...(userID && { userID }),
@@ -78,11 +78,11 @@ const getGigs = async (request, response) => {
                 },
             })
         }
-        
+
         const gigs = await Gig.find(filters).sort({ [sort]: -1 }).populate('userID', 'username cover email description isSeller _id image');
         return response.send(gigs);
     }
-    catch({message, status = 500}) {
+    catch ({ message, status = 500 }) {
         return response.status(status).send({
             error: true,
             message

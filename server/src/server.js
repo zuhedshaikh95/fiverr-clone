@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(compression());
 app.use(cors({
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5173', 'http://localhost:4173', 'https://fiverr-clone-zuhed.netlify.app'],
     credentials: true
 }));
 
