@@ -34,7 +34,7 @@
 
 <br />
 
-An individual project to sharpen the skillset of MERN stack. I'm a big fan of MVC architecture and have been followed in this project. A well-written maintained, and sophisticated backend with models, controllers, middlewares, and other folders to make it easy to maintain and debug. The usage of middlewares makes it much more performant such as cors, compression, and optimizing the API response delivery. Also, usage of media management tools like Cloudinary to upload user profile pictures Gig sliders, and cover images.
+An individual project to sharpen the skillset of MERN stack. I'm a big fan of MVC architecture and have been followed in this project. A well-written maintained, and sophisticated backend with models, controllers, middlewares, and other folders to make it easy to maintain and debug. The usage of middlewares makes it much more performant such as cors, compression, and optimizing the API response delivery. Also, usage of media management tools like Cloudinary to upload user profile pictures, Gig slider images, and cover images.
 As for the front end, the UI has only been built using JSX and Scss. For state management and error handling, hooks from the Tanstack library have been implemented. Lastly, react-router-dom for routing and private routes.
 
 <br />
@@ -68,6 +68,7 @@ As for the front end, the UI has only been built using JSX and Scss. For state m
 - My Orders Section for details of all gigs bought
 - Can review gig and give stars
 - Order securely with Stripe
+- Search gigs with keywords
 
 <br />
 
