@@ -74,34 +74,19 @@ As for the front end, the UI has only been built using JSX and Scss. For state m
 
 ## Glimpses of fiverr-clone 😉 :
 
-<table>
-  <tr>
-    <td><img src="https://i.ibb.co/4Z9CMpn/1.png"  alt="home" /></td>
-    <td><img src="https://i.ibb.co/QQQgWTc/2.png"  alt="slider" /></td>
-  </tr>
-  <tr>
+  <td><img width='100%' src="https://i.ibb.co/4Z9CMpn/1.png"  alt="home" /></td>
+  <td><img src="https://i.ibb.co/QQQgWTc/2.png"  alt="slider" /></td>
     <td><img src="https://i.ibb.co/YNyrDZb/3.png"  alt="men" /></td>
    <td><img src="https://i.ibb.co/BGw32m3/4.png"  alt="allProducts" /></td>
-  </tr>
-  <tr>
     <td><img src="https://i.ibb.co/PjXSMsk/5.png" alt="allProducts" /></td>
     <td><img src="https://i.ibb.co/M2xgqN1/13.png"  alt="men" /></td>
-  </tr>
-  <tr>
     <td><img src="https://i.ibb.co/sKdj3BM/7.png" alt="allProducts" /></td>
     <td><img src="https://i.ibb.co/99VZBNq/11.png"  alt="men" /></td>
-  </tr>
-  <tr>
     <td><img src="https://i.ibb.co/rc2rzw1/10.png" alt="allProducts" /></td>
     <td><img src="https://i.ibb.co/59WnSW8/9.png"  alt="men" /></td>
-  </tr>
-  <tr>
     <td><img src="https://i.ibb.co/GkRtV3T/8.png" alt="allProducts" /></td>
     <td><img src="https://i.ibb.co/TkxZjcW/12.png" alt="allProducts" /></td>
     <td></td>
-  </tr>
-</table>
-
 <br />
 
 ## Contact
