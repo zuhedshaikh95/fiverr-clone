@@ -84,7 +84,7 @@ As for the front end, the UI has only been built using JSX and Scss. For state m
   </tr>
   <tr>
     <td><img src="https://i.ibb.co/PjXSMsk/5.png" alt="allProducts" /></td>
-    <td><img src="https://i.ibb.co/2tkL6K7/6.png"  alt="men" /></td>
+    <td><img src="https://i.ibb.co/M2xgqN1/13.png"  alt="men" /></td>
   </tr>
   <tr>
     <td><img src="https://i.ibb.co/sKdj3BM/7.png" alt="allProducts" /></td>
