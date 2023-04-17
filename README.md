@@ -68,6 +68,7 @@ As for the front end, the UI has only been built using JSX and Scss. For state m
 - My Orders Section for details of all gigs bought
 - Can review gig and give stars
 - Order securely with Stripe
+- Search gigs with keywords
 
 <br />
 
