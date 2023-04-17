@@ -17,6 +17,7 @@ const Orders = () => {
     queryFn: () =>
       axiosFetch.get(`/orders`)
         .then(({ data }) => {
+          console.log(data);
           return data;
         })
         .catch(({ response }) => {
@@ -25,8 +26,8 @@ const Orders = () => {
   });
 
   const handleContact = async (order) => {
-    const sellerID = order.sellerID;
-    const buyerID = order.buyerID;
+    const sellerID = order.sellerID.hasOwnProperty('_id') ? order.sellerID._id : order.sellerID;
+    const buyerID = order.buyerID.hasOwnProperty('_id') ? order.buyerID._id : order.buyerID;
 
     axiosFetch.get(`/conversations/single/${sellerID}/${buyerID}`)
       .then(({ data }) => {
@@ -58,6 +59,7 @@ const Orders = () => {
                 <thead>
                   <tr>
                     <th>Image</th>
+                    <th>{currentUser.isSeller ? 'Buyer' : 'Seller'}</th>
                     <th>Title</th>
                     <th>Price</th>
                     <th>Contact</th>
@@ -74,6 +76,7 @@ const Orders = () => {
                             alt=""
                           />
                         </td>
+                        <td>{currentUser.isSeller ? order.buyerID.username : order.sellerID.username}</td>
                         <td>{order.title}</td>
                         <td>{order.price.toLocaleString('en-IN', {
                           maximumFractionDigits: 0,

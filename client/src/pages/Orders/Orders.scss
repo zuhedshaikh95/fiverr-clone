@@ -26,7 +26,8 @@
                 td {
                     img {
                         width: 100px;
-                        object-fit: cover;
+                        height: 100px;
+                        object-fit: contain;
                     }
                     padding: 0 10px;
                 }
