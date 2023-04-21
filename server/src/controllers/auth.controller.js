@@ -59,14 +59,14 @@ const authLogin = async (request, response) => {
                 isSeller: user.isSeller
             }, JWT_SECRET, { expiresIn: '7 days' });
 
-            const serialised =  {
+            const cookieConfig =  {
                 httpOnly: true,
+                sameSite: NODE_ENV === 'production' ? 'strict' : false,
                 secure: NODE_ENV === 'production',
-                sameSite: NODE_ENV === 'production' ? 'none' : 'strict',
-                path: '/',
-              };
+                maxAge: 60 * 60 * 24 * 7 * 1000
+            };
 
-            return response.cookie('accessToken', token, serialised)
+            return response.cookie('accessToken', token, cookieConfig)
             .status(202).send({
                 error: false,
                 message: 'Success!',

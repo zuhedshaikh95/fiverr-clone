@@ -20,7 +20,7 @@ const userMiddleware = (request, response, next) => {
         }
         
         authLogout(request, response);
-        throw CustomException('Unauthorized access!', 400);
+        throw CustomException('Relogin', 400);
     }
     catch({message, status = 500}) {
         return response.status(status).send({
