@@ -65,7 +65,6 @@ const authLogin = async (request, response) => {
                 sameSite: NODE_ENV === 'production' ? 'strict' : false,
                 secure: true,
                 maxAge: 60 * 60 * 24 * 7 * 1000, // 7 days
-                domain: NODE_ENV === 'production' ? '.fiverr-clone-zuhed.netlify.app' : 'localhost',
                 path: '/'
             }
 
