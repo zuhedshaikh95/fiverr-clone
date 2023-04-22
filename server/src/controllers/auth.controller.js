@@ -60,9 +60,9 @@ const authLogin = async (request, response) => {
             }, JWT_SECRET, { expiresIn: '7 days' });
 
             const cookieConfig =  {
-                httpOnly: true,
-                sameSite: NODE_ENV === 'production' ? 'strict' : false,
                 secure: NODE_ENV === 'production',
+                httpOnly: true,
+                sameSite: 'strict',
                 maxAge: 60 * 60 * 24 * 7 * 1000 // 7 days
             };
 
@@ -86,7 +86,7 @@ const authLogin = async (request, response) => {
 
 const authLogout = async (request, response) => {
     return response.clearCookie('accessToken', {
-        sameSite: 'none',
+        sameSite: 'strict',
         secure: true
     })
     .send({
