@@ -4,9 +4,6 @@ svg {
     height: 30px;
     width: 30px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 50%;
 
     box-shadow: 0 0 8px rgba(0,0,0,.1);
@@ -26,9 +23,5 @@ svg {
 }
 
 .next {
-    left: 98%;
-
-    @media screen and (max-width: 900px) {
-        left: 95%;
-    }
+    right: -8px;
 }
