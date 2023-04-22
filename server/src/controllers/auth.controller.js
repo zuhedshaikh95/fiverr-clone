@@ -60,9 +60,9 @@ const authLogin = async (request, response) => {
             }, JWT_SECRET, { expiresIn: '7 days' });
 
             const cookieConfig =  {
-                secure: NODE_ENV === 'production',
                 httpOnly: true,
-                sameSite: NODE_ENV === 'production' ? 'strict' : 'none',
+                secure: NODE_ENV === 'production',
+                sameSite: NODE_ENV === 'production' ? 'strict' : false,
                 maxAge: 60 * 60 * 24 * 7 * 1000 // 7 days
             };
 
