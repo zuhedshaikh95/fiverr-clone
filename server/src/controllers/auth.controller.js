@@ -1,6 +1,7 @@
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cookie = require('cookie');
 const { CustomException } = require('../utils');
 const saltRounds = 10;
 const { JWT_SECRET, NODE_ENV } = process.env;
@@ -59,15 +60,16 @@ const authLogin = async (request, response) => {
                 isSeller: user.isSeller
             }, JWT_SECRET, { expiresIn: '7 days' });
 
-            const cookieConfig =  {
+            const cookieConfig =  cookie.serialize('accessToken', token, {
                 httpOnly: true,
                 sameSite: NODE_ENV === 'production' ? 'strict' : false,
                 secure: NODE_ENV === 'production',
-                maxAge: 60 * 60 * 24 * 7 * 1000 // 7 days
-            };
+                maxAge: 60 * 60 * 24 * 7, // 7 days
+                path: '/'
+            })
 
-            return response.cookie('accessToken', token, cookieConfig)
-            .status(202).send({
+            response.setHeader('Set-Cookie', cookieConfig);
+            return response.status(202).send({
                 error: false,
                 message: 'Success!',
                 user: data
