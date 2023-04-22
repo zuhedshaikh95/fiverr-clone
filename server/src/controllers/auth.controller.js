@@ -61,8 +61,8 @@ const authLogin = async (request, response) => {
 
             const cookieConfig =  {
                 httpOnly: true,
-                secure: NODE_ENV === 'production',
                 sameSite: NODE_ENV === 'production' ? 'strict' : false,
+                secure: NODE_ENV === 'production',
                 maxAge: 60 * 60 * 24 * 7 * 1000 // 7 days
             };
 
@@ -86,7 +86,7 @@ const authLogin = async (request, response) => {
 
 const authLogout = async (request, response) => {
     return response.clearCookie('accessToken', {
-        sameSite: 'strict',
+        sameSite: 'none',
         secure: true
     })
     .send({
