@@ -60,16 +60,17 @@ const authLogin = async (request, response) => {
                 isSeller: user.isSeller
             }, JWT_SECRET, { expiresIn: '7 days' });
 
-            const cookieConfig =  cookie.serialize('accessToken', token, {
+            const cookieConfig =  {
                 httpOnly: true,
                 sameSite: NODE_ENV === 'production' ? 'strict' : false,
-                secure: NODE_ENV === 'production',
-                maxAge: 60 * 60 * 24 * 7, // 7 days
+                secure: true,
+                maxAge: 60 * 60 * 24 * 7 * 1000, // 7 days
+                domain: NODE_ENV === 'production' ? 'fiverr-clone-zuhed.netlify.app' : 'localhost',
                 path: '/'
-            })
+            }
 
-            response.setHeader('Set-Cookie', cookieConfig);
-            return response.status(202).send({
+            return response.cookie('accessToken', token, cookieConfig)
+            .status(202).send({
                 error: false,
                 message: 'Success!',
                 user: data
