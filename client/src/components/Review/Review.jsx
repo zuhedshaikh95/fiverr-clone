@@ -4,21 +4,21 @@ import './Review.scss';
 
 const Review = (props) => {
   const { review } = props;
-  const country = getCountryFlag(review?.userID.country);
+  const country = getCountryFlag(review?.userID?.country);
 
   return (
   <div className="review">
       <div className="user">
         <img
           className="pp"
-          src={review.userID.image || '/media/noavatar.png'}
+          src={review.userID?.image || '/media/noavatar.png'}
           alt=""
         />
         <div className="info">
           <span>{review?.userID?.username}</span>
           <div className="country">
             <img
-              src={country.normal}
+              src={country?.normal}
               alt=""
             />
             <span>{review?.userID?.country}</span>
