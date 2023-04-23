@@ -1,26 +1,30 @@
 const { User } = require('../models');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const { CustomException } = require('../utils');
-const saltRounds = 10;
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const satelize = require('satelize');
 const { JWT_SECRET, NODE_ENV } = process.env;
+const saltRounds = 10;
 
 const authRegister = async (request, response) => {
-    const { username, email, password, country, image, isSeller, description } = request.body;
+    const { username, email, phone, password, image, isSeller, description } = request.body;
 
     try {
         const hash = bcrypt.hashSync(password, saltRounds);
+        const { country } = satelize.satelize({ip: request.ip}, (error, payload) => payload);
+        
         const user = new User({
             username,
             email,
             password: hash,
             image,
+            country: country.en,
             description,
             isSeller,
-            country
+            phone
         });
-
         await user.save();
+
         return response.status(201).send({
             error: false,
             message: 'New user created!'
@@ -36,7 +40,7 @@ const authRegister = async (request, response) => {
 
         return response.status(500).send({
             error: true,
-            message: 'Something went wrong!'
+            message
         });
     }
 }
@@ -61,13 +65,11 @@ const authLogin = async (request, response) => {
 
             const cookieConfig =  {
                 httpOnly: true,
-                sameSite: 'none',
+                sameSite: NODE_ENV === 'production' ? 'none' : 'strict',
                 secure: NODE_ENV === 'production',
                 maxAge: 60 * 60 * 24 * 7 * 1000, // 7 days
                 path: '/'
             }
-
-            console.log(cookieConfig);
 
             return response.cookie('accessToken', token, cookieConfig)
             .status(202).send({
