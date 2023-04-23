@@ -12,6 +12,8 @@ const authRegister = async (request, response) => {
     try {
         const hash = bcrypt.hashSync(password, saltRounds);
         const { country } = satelize.satelize({ip: request.ip}, (error, payload) => payload);
+
+        console.log(request.ip)
         
         const user = new User({
             username,
