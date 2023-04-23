@@ -72,7 +72,7 @@
           border: 1px solid #e4e5e7;
           height: 40px;
           width: 40px;
-          
+
           position: absolute;
           top: 200px;
           display: flex;
@@ -170,6 +170,15 @@
               .title {
                 font-weight: 300;
               }
+
+              .desc {
+                display: flex;
+                gap: 10px;
+
+                img {
+                  width: 30px;
+                }
+              }
             }
           }
 
@@ -182,7 +191,8 @@
       }
     }
 
-    .right, .right-mobile {
+    .right,
+    .right-mobile {
       flex: 1;
       border: 1px solid lightgray;
       padding: 20px;

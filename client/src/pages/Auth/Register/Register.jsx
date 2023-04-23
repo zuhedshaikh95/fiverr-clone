@@ -13,7 +13,6 @@ const Register = () => {
     email: "",
     password: "",
     phone: '',
-    country: "",
     description: '',
     isSeller: false,
   });
@@ -82,13 +81,6 @@ const Register = () => {
           <input name="password" type="password" onChange={handleChange} />
           <label htmlFor="">Profile Picture</label>
           <input type="file" onChange={(event) => setImage(event.target.files[0])} />
-          <label htmlFor="">Country</label>
-          <input
-            name="country"
-            type="text"
-            placeholder="India"
-            onChange={handleChange}
-          />
           <button type="submit" disabled={loading}>{loading ? 'Loading...' : 'Register'}</button>
         </div>
         <div className="right">

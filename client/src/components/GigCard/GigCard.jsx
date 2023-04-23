@@ -18,7 +18,7 @@ const GigCard = (props) => {
           <div className="star">
             <img src="./media/star.png" alt="" />
             <span>{Math.round(data.totalStars / data.starNumber) || 0}</span>
-            <span className='totalStars'>({data.sales})</span>
+            <span className='totalStars'>({data.starNumber})</span>
           </div>
         </div>
         <hr />

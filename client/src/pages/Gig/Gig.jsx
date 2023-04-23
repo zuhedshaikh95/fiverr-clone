@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Slider } from 'infinite-react-carousel';
 import { useQuery } from '@tanstack/react-query';
-import { axiosFetch } from '../../utils';
+import { axiosFetch, getCountryFlag } from '../../utils';
 import { Link, useParams } from 'react-router-dom';
 import { Reviews } from '../../components';
 import toast from 'react-hot-toast';
@@ -15,19 +15,22 @@ const Gig = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ['gig'],
     queryFn: () =>
-        axiosFetch.get(`/gigs/single/${_id}`)
+      axiosFetch.get(`/gigs/single/${_id}`)
         .then(({ data }) => {
           data.images.unshift(data.cover);
-            return data;
+          return data;
         })
         .catch(({ response }) => {
           toast.error(response.data.message);
         })
   });
 
+  const country = getCountryFlag(data?.userID.country);
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
 
   return (
     <div className="gig">
@@ -138,7 +141,11 @@ const Gig = () => {
                     <div className="items">
                       <div className="item">
                         <span className="title">From</span>
-                        <span className="desc">{data?.userID.country}</span>
+                        <span className="desc">{data?.userID.country}
+                          <span className='flag'>
+                          <img src={country.normal} alt="" />
+                          </span>
+                        </span>
                       </div>
                       <div className="item">
                         <span className="title">Member since</span>

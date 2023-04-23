@@ -1,8 +1,10 @@
 import React from 'react';
+import { getCountryFlag } from '../../utils';
 import './Review.scss';
 
 const Review = (props) => {
   const { review } = props;
+  const country = getCountryFlag(review?.userID.country);
 
   return (
   <div className="review">
@@ -16,7 +18,7 @@ const Review = (props) => {
           <span>{review?.userID?.username}</span>
           <div className="country">
             <img
-              src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1fa-1f1f8.png"
+              src={country.normal}
               alt=""
             />
             <span>{review?.userID?.country}</span>
