@@ -1,7 +1,6 @@
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const cookie = require('cookie');
 const { CustomException } = require('../utils');
 const saltRounds = 10;
 const { JWT_SECRET, NODE_ENV } = process.env;
@@ -63,7 +62,7 @@ const authLogin = async (request, response) => {
             const cookieConfig =  {
                 httpOnly: true,
                 sameSite: NODE_ENV === 'production' ? 'strict' : false,
-                secure: true,
+                secure: NODE_ENV === 'production',
                 maxAge: 60 * 60 * 24 * 7 * 1000, // 7 days
                 path: '/'
             }
