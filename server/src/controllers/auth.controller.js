@@ -3,7 +3,6 @@ const { CustomException } = require('../utils');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const satelize = require('satelize');
-const requestIp = require('request-ip');
 const { JWT_SECRET, NODE_ENV } = process.env;
 const saltRounds = 10;
 
@@ -43,7 +42,7 @@ const authRegister = async (request, response) => {
 
         return response.status(500).send({
             error: true,
-            message: ip
+            message: 'Something went wrong!'
         });
     }
 }
