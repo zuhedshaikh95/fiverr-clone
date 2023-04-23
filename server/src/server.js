@@ -37,9 +37,10 @@ app.get('/', (request, response) => {
 });
 
 app.get('/ip', (request, response) => {
-    const ip = request.headers['x-forwarded-for'] || request.socket.remoteAddress || '';
+    const list = request.headers['x-forwarded-for'] || request.socket.remoteAddress;
+    const ips = list.split(',');
 
-    return response.send({ ip });
+    return response.send({ ip: ips[0] });
 })
 
 app.listen(PORT, async () => {
