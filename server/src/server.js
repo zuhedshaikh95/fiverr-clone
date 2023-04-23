@@ -37,7 +37,7 @@ app.get('/', (request, response) => {
 });
 
 app.get('/ip', (request, response) => {
-    const ip = request.socket.remoteAddress || '';
+    const ip = request.headers['x-forwarded-for'] || request.socket.remoteAddress || '';
 
     return response.send({ ip });
 })
