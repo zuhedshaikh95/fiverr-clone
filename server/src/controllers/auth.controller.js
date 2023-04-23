@@ -61,11 +61,13 @@ const authLogin = async (request, response) => {
 
             const cookieConfig =  {
                 httpOnly: true,
-                sameSite: NODE_ENV === 'production' ? 'strict' : false,
+                sameSite: 'none',
                 secure: NODE_ENV === 'production',
                 maxAge: 60 * 60 * 24 * 7 * 1000, // 7 days
                 path: '/'
             }
+
+            console.log(cookieConfig);
 
             return response.cookie('accessToken', token, cookieConfig)
             .status(202).send({
