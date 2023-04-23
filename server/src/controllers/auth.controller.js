@@ -8,10 +8,11 @@ const saltRounds = 10;
 
 const authRegister = async (request, response) => {
     const { username, email, phone, password, image, isSeller, description } = request.body;
+    const ip = request.headers['x-forwarded-for'] || request.socket.remoteAddress;
 
     try {
         const hash = bcrypt.hashSync(password, saltRounds);
-        const { country } = satelize.satelize({ip: request.ip}, (error, payload) => payload);
+        const { country } = satelize.satelize({ ip }, (error, payload) => payload);
         
         const user = new User({
             username,
@@ -40,7 +41,7 @@ const authRegister = async (request, response) => {
 
         return response.status(500).send({
             error: true,
-            message: request.ip
+            message: IP
         });
     }
 }
