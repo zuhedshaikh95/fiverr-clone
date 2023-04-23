@@ -36,6 +36,12 @@ app.get('/', (request, response) => {
     response.send('Hello, Topper!');
 });
 
+app.get('/ip', (request, response) => {
+    const ip = request.headers['x-forwarded-for'] || request.socket.remoteAddress;
+
+    return response.send({ ip });
+})
+
 app.listen(PORT, async () => {
     try {
         connect();

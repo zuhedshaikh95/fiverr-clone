@@ -3,12 +3,13 @@ const { CustomException } = require('../utils');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const satelize = require('satelize');
+const requestIp = require('request-ip');
 const { JWT_SECRET, NODE_ENV } = process.env;
 const saltRounds = 10;
 
 const authRegister = async (request, response) => {
     const { username, email, phone, password, image, isSeller, description } = request.body;
-    const ip = request.headers['x-forwarded-for'] || request.socket.remoteAddress;
+    const ip = requestIp.getClientIp(request);
 
     try {
         const hash = bcrypt.hashSync(password, saltRounds);
@@ -41,7 +42,7 @@ const authRegister = async (request, response) => {
 
         return response.status(500).send({
             error: true,
-            message: IP
+            message: ip
         });
     }
 }
