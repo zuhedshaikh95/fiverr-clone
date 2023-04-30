@@ -34,7 +34,9 @@
 
 <br />
 <p align="center">
-  <em>Pardon render.com's slow service to the server for initial api response</em>
+  <em>
+    <b>Pardon render.com's slow service to the server for initial api response</b>
+  </em>
 </p>
 <br />
 
