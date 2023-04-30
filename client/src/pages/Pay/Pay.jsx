@@ -6,7 +6,7 @@ import { axiosFetch } from '../../utils';
 import { CheckoutForm } from '../../components';
 import './Pay.scss';
 
-const stripePromise = loadStripe('pk_test_51JT2jqSFY9RyfRMlOFUJ42d70JBSFztwI5hLDeUR4qLKJYOqIGu2tCIu2cD9lc9rVlZthqsqGgasEfk2s2Z2eVJ100T2nqQNZf');
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Pay = () => {
   const { _id } = useParams();
