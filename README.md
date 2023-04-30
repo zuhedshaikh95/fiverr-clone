@@ -199,18 +199,26 @@ To run this project, you will need to add the following environment variables to
 
 ### Server
 `JWT_SECRET`
+e.g. this_is_secret_123
 
-`MONGODB_URL`
+`MONGODB_URI`
+e.g. mongodb cluster URI
 
 `STRIPE_SECRET`
+e.g. Secret key from stripe dashboard
 
 `NODE_ENV`
+e.g. 'development' for local and 'production' for production
 
 ### Client
 `VITE_API_URL`
+e.g. http://localhost:3000/api or production deployed server link
 
 `VITE_PAYMENT_SUCCESS_REDIRECT`
+e.g. http://localhost:3000/success or production deployed frontend link
 
+`VITE_STRIPE_PUBLISHABLE_KEY`
+e.g. Publishable key from stripe dashboard
 
 ### Tools used on this project
 
