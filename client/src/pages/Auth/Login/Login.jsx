@@ -12,6 +12,7 @@ const initialState = {
 const Login = () => {
   const [formInput, setFormInput] = useState(initialState);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,6 +29,15 @@ const Login = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    for(let key in formInput) {
+      if(formInput[key] === '') {
+        toast.error('Please fill all input fields: ' + key);
+        return;
+      }
+    }
+
+    setLoading(true);
     try {
       const { data } = await axiosFetch.post('/auth/login', formInput);
       localStorage.setItem('currentUser', JSON.stringify(data.user));
@@ -43,6 +53,10 @@ const Login = () => {
         duration: 3000,
       });
     }
+    finally {
+      setLoading(false);
+      setError(null);
+    }
   }
 
   return (
@@ -54,7 +68,7 @@ const Login = () => {
 
         <label htmlFor="">Password</label>
         <input name='password' type='password' placeholder='password' onChange={handleFormInput} />
-        <button type='submit'>Login</button>
+        <button disabled={loading} type='submit'>{ loading ? 'Loading' : 'Login' }</button>
         <span>{error && error}</span>
       </form>
     </div>
