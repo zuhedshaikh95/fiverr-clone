@@ -33,6 +33,9 @@
 </p>
 
 <br />
+<p align="center">
+  <em>Pardon render.com's slow service from the server</em>
+</p>
 <br />
 
 ![cover](https://i.ibb.co/16SWfbg/Fiverr-Gif.gif)
