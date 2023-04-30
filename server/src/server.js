@@ -45,7 +45,7 @@ app.get('/ip', (request, response) => {
 
 app.listen(PORT, async () => {
     try {
-        connect();
+        await connect();
         console.log(`Listening at http://localhost:${PORT}`);
     }
     catch ({ message }) {
