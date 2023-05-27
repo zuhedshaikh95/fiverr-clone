@@ -102,8 +102,24 @@ const authLogout = async (request, response) => {
     });
 }
 
+const authStatus = async (request, response) => {
+    const { accessToken } = request.cookies;
+
+    try {
+        const url = request.protocol + '://' + request.get('host') + request.originalUrl;
+        return response.send({ url })
+    }
+    catch({message, status = 500}) {
+        return response.status(status).send({
+            error: true,
+            message
+        })
+    }
+}
+
 module.exports = {
     authLogin,
     authLogout,
-    authRegister
+    authRegister,
+    authStatus
 }
