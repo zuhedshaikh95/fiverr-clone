@@ -11,3 +11,4 @@ export { default as Reviews } from './Reviews/Reviews';
 export { default as Review } from './Review/Review';
 export { default as CheckoutForm } from './CheckoutForm/CheckoutForm';
 export { default as PrivateRoute } from './PrivateRoute/PrivateRoute';
+export { default as Loader } from './Loader';
