@@ -103,11 +103,18 @@ const authLogout = async (request, response) => {
 }
 
 const authStatus = async (request, response) => {
-    const { accessToken } = request.cookies;
-
     try {
-        const url = request.protocol + '://' + request.get('host') + request.originalUrl;
-        return response.send({ url })
+        const user = await User.findOne({ _id: request.userID }).select('-password');
+
+        if(!user) {
+            throw CustomException('User not found!', 404);
+        }
+
+        return response.send({
+            error: false,
+            message: 'Success!',
+            user
+        })
     }
     catch({message, status = 500}) {
         return response.status(status).send({
