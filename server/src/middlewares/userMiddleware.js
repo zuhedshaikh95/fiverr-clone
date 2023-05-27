@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { CustomException } = require('../utils');
 const { authLogout } = require('../controllers/auth.controller');
-const { JWT_SECRET } = process.env;
 
 const userMiddleware = (request, response, next) => {
     const token = request.cookies.accessToken;
@@ -11,7 +10,7 @@ const userMiddleware = (request, response, next) => {
             throw CustomException('Unauthorized access!', 400);
         }
         
-        const verification = jwt.verify(token, JWT_SECRET);
+        const verification = jwt.verify(token, process.env.JWT_SECRET);
         if(verification) {
             request.userID = verification._id;
             request.isSeller = verification.isSeller;
@@ -20,7 +19,7 @@ const userMiddleware = (request, response, next) => {
         }
         
         authLogout(request, response);
-        throw CustomException('Relogin', 400);
+        throw CustomException('Try signing in again!', 400);
     }
     catch({message, status = 500}) {
         return response.status(status).send({
