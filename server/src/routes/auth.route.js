@@ -1,5 +1,6 @@
 const express = require('express');
 const { authLogin, authLogout, authRegister, authStatus } = require('../controllers/auth.controller');
+const { authenticate } = require('../middlewares');
 
 const app = express.Router();
 
@@ -13,6 +14,6 @@ app.post('/login', authLogin);
 app.post('/logout', authLogout)
 
 // Check Auth status
-app.post('/me', authStatus);
+app.get('/me', authenticate, authStatus);
 
 module.exports = app;
