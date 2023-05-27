@@ -9,6 +9,10 @@ svg {
     box-shadow: 0 0 8px rgba(0,0,0,.1);
     padding: 5px;
     cursor: pointer;
+
+    @media screen and (max-width: 600px) {
+        display: none;
+    }
 }
 
 .prev, .next {
@@ -19,9 +23,9 @@ svg {
 }
 
 .prev {
-    left: -8px;
+    left: 0;
 }
 
 .next {
-    right: -8px;
+    right: 0;
 }
