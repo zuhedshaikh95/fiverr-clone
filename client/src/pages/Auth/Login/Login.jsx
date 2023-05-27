@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { axiosFetch } from '../../../utils';
-import toast from 'react-hot-toast';
+import { useRecoilState } from 'recoil';
+import { userAtom } from '../../../atoms';
 import './Login.scss';
 
 const initialState = {
@@ -14,10 +16,7 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+  const [user, setUser] = useRecoilState(userAtom);
 
   const handleFormInput = (event) => {
     const { value, name } = event.target;
@@ -40,7 +39,7 @@ const Login = () => {
     setLoading(true);
     try {
       const { data } = await axiosFetch.post('/auth/login', formInput);
-      localStorage.setItem('currentUser', JSON.stringify(data.user));
+      setUser(data.user);
       toast.success("Welcome back!", {
         duration: 3000,
         icon: "😃"

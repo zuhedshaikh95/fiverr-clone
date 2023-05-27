@@ -60,11 +60,7 @@
       }
 
       .slider {
-        img {
-          max-height: 500px;
-          object-fit: contain;
-
-        }
+        position: relative;
 
         .carousel-prev,
         .carousel-next {
