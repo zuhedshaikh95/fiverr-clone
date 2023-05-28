@@ -1,19 +1,21 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { axiosFetch, getCurrentUser } from '../../utils';
+import { axiosFetch } from '../../utils';
 import toast from 'react-hot-toast';
 import './MyGigs.scss';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../atoms';
 
 const MyGigs = () => {
-  const currentUser = getCurrentUser();
+  const user = useRecoilValue(userState);
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
     queryKey: ['my-gigs'],
     queryFn: () =>
-      axiosFetch(`/gigs?userID=${currentUser._id}`)
+      axiosFetch(`/gigs?userID=${user._id}`)
         .then(({ data }) => {
           console.table(data)
           return data;
