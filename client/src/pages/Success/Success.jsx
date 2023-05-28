@@ -24,7 +24,7 @@ const Success = () => {
 
 
   return (
-    <div>Payment successful. You are being redirected to the orders page. Please do not close the page</div>
+    <div className='pay-message'>Payment successful. You are being redirected to the orders page. Please do not close the page</div>
   )
 }
 

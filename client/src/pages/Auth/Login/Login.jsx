@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { axiosFetch } from '../../../utils';
+import toast from 'react-hot-toast';
 import { useRecoilState } from 'recoil';
-import { userAtom } from '../../../atoms';
+import { userState } from '../../../atoms';
 import './Login.scss';
 
 const initialState = {
@@ -15,8 +15,12 @@ const Login = () => {
   const [formInput, setFormInput] = useState(initialState);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
-  const [user, setUser] = useRecoilState(userAtom);
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const handleFormInput = (event) => {
     const { value, name } = event.target;

@@ -3,12 +3,14 @@ import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { gigReducer, initialState } from '../../reducers/gigReducer';
 import { cards } from '../../data';
-import { axiosFetch, generateImageURL, getCurrentUser } from '../../utils';
+import { axiosFetch, generateImageURL } from '../../utils';
 import toast from 'react-hot-toast';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../atoms';
 import './Add.scss';
 
 const Add = () => {
-  const currentUser = getCurrentUser();
+  const user = useRecoilValue(userState);
   const [state, dispatch] = useReducer(gigReducer, initialState);
   const [coverImage, setCoverImage] = useState(null);
   const [gigImages, setGigImages] = useState([]);
@@ -74,7 +76,7 @@ const Add = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    const form = {...state, userID: currentUser._id}
+    const form = {...state, userID: user._id}
     for(let key in form) {
       if(form[key] === '' || form[key].length === 0) {
         toast.error('Please fill input field: ' + key);
