@@ -1,23 +1,37 @@
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Slider from "react-slick";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { axiosFetch } from "../../utils";
-import { useQuery } from "@tanstack/react-query";
-import { Loader } from "../../components";
-
+import { useRecoilState } from "recoil";
+import { userState } from "../../atoms";
 import "./Navbar.scss";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useRecoilState } from "recoil";
-import { userAtom } from "../../atoms";
+import { Loader } from "..";
+import { useQuery } from "@tanstack/react-query";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showPanel, setShowPanel] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [user, setUser] = useRecoilState(userAtom);
+  const [user, setUser] = useRecoilState(userState);
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["me"],
+    queryFn: () =>
+      axiosFetch.get(`/auth/me`)
+        .then(({ data }) => {
+          setUser(data.user);
+          return data.user;
+        })
+        .catch(({ response }) => {
+          setUser(null);
+          console.log(response.data.message);
+        }),
+  });
 
   const isActive = () => {
     window.scrollY > 0 ? setShowMenu(true) : setShowMenu(false);
@@ -29,20 +43,6 @@ const Navbar = () => {
       window.removeEventListener("scroll", isActive);
     };
   }, []);
-
-  const { isLoading, error, data, refetch } = useQuery({
-    queryKey: ["me"],
-    queryFn: () =>
-      axiosFetch.get(`/auth/me`)
-        .then(({ data }) => {
-          setUser(data.user);
-          return data.user;
-        })
-        .catch(({ response }) => {
-          console.log(response.data.message);
-          return null;
-        }),
-  });
 
   const menuLinks = [
     { path: "/gigs?category=design", name: "Graphics & Design" },
@@ -110,54 +110,56 @@ const Navbar = () => {
             <span>English</span>
             {!user?.isSeller && <span>Become a Seller</span>}
           </div>
-          {!user && (
-            <span>
-              <Link to="/login" className="link">
-                Sign in
-              </Link>
-            </span>
-          )}
-          {!user && (
-            <button
-              className={showMenu || pathname !== "/" ? "join-active" : ""}
-            >
-              <Link to="/register" className="link">
-                Join
-              </Link>
-            </button>
-          )}
           {isLoading ? (
-            <Loader />
+            <Loader size={35} />
           ) : (
-            user && (
-              <div className="user" onClick={() => setShowPanel(!showPanel)}>
-                <img src={user.image} />
-                <span>{user?.username}</span>
-                {showPanel && (
-                  <div className="options">
-                    {user?.isSeller && (
-                      <>
-                        <Link className="link" to="/my-gigs">
-                          Gigs
-                        </Link>
-                        <Link className="link" to="/organize">
-                          Add New Gig
-                        </Link>
-                      </>
-                    )}
-                    <Link className="link" to="/orders">
-                      Orders
-                    </Link>
-                    <Link className="link" to="/messages">
-                      Messages
-                    </Link>
-                    <Link className="link" to="/" onClick={handleLogout}>
-                      Logout
-                    </Link>
-                  </div>
-                )}
-              </div>
-            )
+            <>
+              {!user && (
+                <span>
+                  <Link to="/login" className="link">
+                    Sign in
+                  </Link>
+                </span>
+              )}
+              {!user && (
+                <button
+                  className={showMenu || pathname !== "/" ? "join-active" : ""}
+                >
+                  <Link to="/register" className="link">
+                    Join
+                  </Link>
+                </button>
+              )}
+              {user && (
+                <div className="user" onClick={() => setShowPanel(!showPanel)}>
+                  <img src={user.image || "/media/noavatar.png"} />
+                  <span>{user?.username}</span>
+                  {showPanel && (
+                    <div className="options">
+                      {user?.isSeller && (
+                        <>
+                          <Link className="link" to="/my-gigs">
+                            Gigs
+                          </Link>
+                          <Link className="link" to="/organize">
+                            Add New Gig
+                          </Link>
+                        </>
+                      )}
+                      <Link className="link" to="/orders">
+                        Orders
+                      </Link>
+                      <Link className="link" to="/messages">
+                        Messages
+                      </Link>
+                      <Link className="link" to="/" onClick={handleLogout}>
+                        Logout
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
