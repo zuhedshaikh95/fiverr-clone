@@ -6,15 +6,21 @@
         width: 75%;
         margin: auto;
         padding: 50px 0px;
-
+        overflow-x: scroll;
+        
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        
         .title {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-
+        
         table {
-            width: 100%;
+            min-width: 100%;
+            margin: auto;
 
             tr {
                 height: 50px;
