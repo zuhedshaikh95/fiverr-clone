@@ -1,12 +1,15 @@
-import React, { useEffect } from "react";
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { axiosFetch } from '../../utils';
-import { Link, useParams } from "react-router-dom";
 import toast from 'react-hot-toast';
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useRecoilValue } from "recoil";
+import { userState } from "../../atoms";
+import { axiosFetch } from '../../utils';
+import { Loader } from '../../components';
 import "./Message.scss";
 
 const Message = () => {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+  const user = useRecoilValue(userState);
   const { conversationID } = useParams();
 
   useEffect(() => {
@@ -53,13 +56,13 @@ const Message = () => {
         </span>
         {
           isLoading
-            ? '...loading'
+            ? <div className="loader"> <Loader /> </div>
             : error
               ? 'Something went wrong'
               : <div className="messages">
                 {
                   data.map((message) => (
-                    <div className={message.userID._id === currentUser._id ? 'owner item' : 'item'} key={message._id}>
+                    <div className={message.userID._id === user._id ? 'owner item' : 'item'} key={message._id}>
                       <img
                         src={message.userID.image || '/media/noavatar.png'}
                         alt=""

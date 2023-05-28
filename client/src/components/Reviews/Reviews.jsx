@@ -1,8 +1,8 @@
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import Review from '../Review/Review';
-import { axiosFetch, userLogout } from '../../utils';
+import { Review, Loader } from '..';
+import { axiosFetch } from '../../utils';
 import toast from 'react-hot-toast';
 import './Reviews.scss';
 
@@ -30,7 +30,6 @@ const Reviews = (props) => {
             })
             .catch(({ response: { data } }) => {
                 if(data.message == 'jwt expired') {
-                    userLogout();
                     navigation('/login');
                 }
                 toast.error(data.message);
@@ -58,7 +57,7 @@ const Reviews = (props) => {
             <h2>Reviews</h2>
             {
                 isLoading
-                    ? '...loading'
+                    ? <div className='loader'><Loader size={35} /></div>
                     : error
                         ? 'Something went wrong!'
                         : data.map((review) => <Review key={review._id} review={review} />)

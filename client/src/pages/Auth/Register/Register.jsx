@@ -1,7 +1,7 @@
+import toast from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { axiosFetch, generateImageURL } from '../../../utils';
-import toast from 'react-hot-toast';
 import './Register.scss'
 
 const Register = () => {

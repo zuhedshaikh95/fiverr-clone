@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { GigCard } from '../../components';
+import { GigCard, Loader } from '../../components';
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from 'react-router-dom';
 import { axiosFetch } from '../../utils';
@@ -75,7 +75,7 @@ const Gigs = () => {
         <div className="cards">
           {
             isLoading
-              ? '...loading'
+              ? <div className='loader'> <Loader size={45} /> </div>
               : error
                 ? 'Something went wrong!'
                 : data.map((gig) => <GigCard key={gig._id} data={gig} />)

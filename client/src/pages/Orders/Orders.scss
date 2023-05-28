@@ -2,6 +2,13 @@
     display: flex;
     justify-content: center;
 
+    .loader {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .container {
         width: 75%;
         margin: auto;

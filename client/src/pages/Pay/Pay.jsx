@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { useParams } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';

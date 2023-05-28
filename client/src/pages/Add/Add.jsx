@@ -1,10 +1,10 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useEffect, useReducer, useState } from 'react';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { gigReducer, initialState } from '../../reducers/gigReducer';
 import { cards } from '../../data';
 import { axiosFetch, generateImageURL } from '../../utils';
-import toast from 'react-hot-toast';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../atoms';
 import './Add.scss';

@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import moment from 'moment';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { axiosFetch } from '../../utils';
-import moment from 'moment';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../atoms';
+import { Loader } from '../../components';
 import './Messages.scss';
 
 const Messages = () => {
-  const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+  const user = useRecoilValue(userState);
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -45,13 +48,13 @@ const Messages = () => {
         </div>
         {
           isLoading
-            ? '...loading'
+            ? <div className='loader'> <Loader /> </div>
             : error
               ? 'Something went wrong!'
               : <table>
                 <thead>
                   <tr>
-                    <th>{currentUser.isSeller ? 'Buyer' : 'Seller'}</th>
+                    <th>{user.isSeller ? 'Buyer' : 'Seller'}</th>
                     <th>Last Message</th>
                     <th>Date</th>
                     <th>Action</th>
@@ -60,9 +63,9 @@ const Messages = () => {
                 <tbody>
                   {
                     data.map((conv) => (
-                      <tr key={conv._id} className={((currentUser.isSeller && !conv.readBySeller) || (!currentUser.isSeller && !conv.readByBuyer)) &&
+                      <tr key={conv._id} className={((user.isSeller && !conv.readBySeller) || (!user.isSeller && !conv.readByBuyer)) &&
                         "active" || ''}>
-                        <td>{currentUser.isSeller ? conv.buyerID.username : conv.sellerID.username}</td>
+                        <td>{user.isSeller ? conv.buyerID.username : conv.sellerID.username}</td>
                         <td>
                           <Link className='link' to={`/message/${conv.conversationID}`}>
                             {conv?.lastMessage?.slice(0, 100)}...
@@ -71,7 +74,7 @@ const Messages = () => {
                         <td>{moment(conv.updatedAt).fromNow()}</td>
                         <td>
                           {
-                            ((currentUser.isSeller && !conv.readBySeller) || (!currentUser.isSeller && !conv.readByBuyer)) &&
+                            ((user.isSeller && !conv.readBySeller) || (!user.isSeller && !conv.readByBuyer)) &&
                             (<button onClick={() => handleMessageRead(conv.conversationID)}>Mark as read</button>)
                           }
                         </td>

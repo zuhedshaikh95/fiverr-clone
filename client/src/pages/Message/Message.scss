@@ -9,6 +9,13 @@
         height: 100%;
         margin: auto;
 
+        .loader {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .breadcrumbs {
             color: #555;
         }

@@ -1,14 +1,13 @@
-import { Navigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../atoms';
+import { Navigate, useLocation } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
-  const user = useRecoilValue(userState);
+  const user = JSON.parse(localStorage.getItem('user')) || null;
+  const { pathname } = useLocation();
 
-  return (user) ? (
+  return user ? (
     children
   ) : (
-    <Navigate to='/login' />
+    <Navigate to='/login' state={{ from: pathname }} replace />
   )
 
 }

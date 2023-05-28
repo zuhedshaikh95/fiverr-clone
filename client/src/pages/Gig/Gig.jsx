@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import toast from 'react-hot-toast';
+import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { axiosFetch, getCountryFlag } from '../../utils';
 import { Link, useParams } from 'react-router-dom';
-import { NextArrow, PrevArrow, Reviews } from '../../components';
-import toast from 'react-hot-toast';
+import { Loader, NextArrow, PrevArrow, Reviews } from '../../components';
 import './Gig.scss';
 
 import { CarouselProvider, Slider, Slide, ImageWithZoom, ButtonBack, ButtonNext, Image } from 'pure-react-carousel';
@@ -38,7 +38,7 @@ const Gig = () => {
     <div className="gig">
       {
         isLoading
-          ? '...loading'
+          ? <div className='loader'> <Loader /> </div>
           : error
             ? 'Something went wrong!'
             : <div className="container">

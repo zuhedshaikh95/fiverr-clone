@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Featured, Slide, TrustedBy } from '../../components';
 import { CategoryCard, ProjectCard } from '../../components';
 import { cards, projects } from '../../data';
@@ -9,8 +9,7 @@ const Home = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [])
-
+  }, []);
   return (
     <div className='home'>
       <Featured />

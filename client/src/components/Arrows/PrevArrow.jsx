@@ -1,4 +1,3 @@
-import React from 'react';
 import { GrFormPrevious } from 'react-icons/gr';
 import './Arrows.scss';
 

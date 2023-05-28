@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { axiosFetch } from "../../utils";
 import { useRecoilState } from "recoil";
 import { userState } from "../../atoms";
+import { Loader } from "..";
 import "./Navbar.scss";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Loader } from "..";
-import { useQuery } from "@tanstack/react-query";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -18,20 +17,24 @@ const Navbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [user, setUser] = useRecoilState(userState);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["me"],
-    queryFn: () =>
-      axiosFetch.get(`/auth/me`)
-        .then(({ data }) => {
-          setUser(data.user);
-          return data.user;
-        })
-        .catch(({ response }) => {
-          setUser(null);
-          console.log(response.data.message);
-        }),
-  });
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      try {
+        const { data } = await axiosFetch.get('/auth/me');
+        setUser(data.user);
+      }
+      catch({ response }) {
+        localStorage.removeItem('user');
+        console.log(response.data.message);
+      }
+      finally {
+        setIsLoading(false);
+      }
+    })();
+  }, []);
 
   const isActive = () => {
     window.scrollY > 0 ? setShowMenu(true) : setShowMenu(false);
@@ -86,6 +89,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await axiosFetch.post("/auth/logout");
+      localStorage.removeItem('user');
       setUser(null);
       navigate("/");
     } catch ({ response }) {

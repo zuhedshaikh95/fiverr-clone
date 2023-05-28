@@ -108,6 +108,13 @@
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+
+            .loader {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
             
             @media screen and (max-width: 600px) {
                 justify-content: center;

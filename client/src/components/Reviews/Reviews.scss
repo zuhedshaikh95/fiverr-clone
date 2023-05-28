@@ -1,6 +1,13 @@
 .reviews {
     margin-top: 50px;
 
+    .loader {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .add {
         margin-top: 20px;
         display: flex;

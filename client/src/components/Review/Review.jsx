@@ -1,4 +1,3 @@
-import React from 'react';
 import { getCountryFlag } from '../../utils';
 import './Review.scss';
 

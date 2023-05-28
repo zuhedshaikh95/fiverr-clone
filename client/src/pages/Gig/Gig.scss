@@ -4,6 +4,13 @@
   display: flex;
   justify-content: center;
 
+  .loader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .container {
     width: 95%;
     margin: auto;

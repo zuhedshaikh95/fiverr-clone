@@ -1,12 +1,15 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { axiosFetch } from "../../utils";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../atoms";
+import { Loader } from '../../components';
 import "./Orders.scss";
 
 const Orders = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
   const navigate = useNavigate();
+  const user = useRecoilValue(userState);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -18,7 +21,6 @@ const Orders = () => {
       axiosFetch
         .get(`/orders`)
         .then(({ data }) => {
-          console.log(data);
           return data;
         })
         .catch(({ response }) => {
@@ -42,8 +44,8 @@ const Orders = () => {
       .catch(async ({ response }) => {
         if (response.status === 404) {
           const { data } = await axiosFetch.post("/conversations", {
-            to: currentUser.isSeller ? buyerID : sellerID,
-            from: currentUser.isSeller ? sellerID : buyerID,
+            to: user.isSeller ? buyerID : sellerID,
+            from: user.isSeller ? sellerID : buyerID,
           });
           navigate(`/message/${data.conversationID}`);
         }
@@ -53,7 +55,7 @@ const Orders = () => {
   return (
     <div className="orders">
       {isLoading ? (
-        "...loading"
+        <div className="loader"> <Loader /> </div>
       ) : error ? (
         "Something went wrong!"
       ) : (
@@ -65,7 +67,7 @@ const Orders = () => {
             <thead>
               <tr>
                 <th>Image</th>
-                <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th>
+                <th>{user.isSeller ? "Buyer" : "Seller"}</th>
                 <th>Title</th>
                 <th>Price</th>
                 <th>Contact</th>
@@ -78,7 +80,7 @@ const Orders = () => {
                     <img className="img" src={order.image} alt="" />
                   </td>
                   <td>
-                    {currentUser.isSeller
+                    {user.isSeller
                       ? order.buyerID.username
                       : order.sellerID.username}
                   </td>

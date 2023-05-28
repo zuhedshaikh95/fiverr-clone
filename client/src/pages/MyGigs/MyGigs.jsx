@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import toast from 'react-hot-toast';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { axiosFetch } from '../../utils';
-import toast from 'react-hot-toast';
-import './MyGigs.scss';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../atoms';
+import { Loader } from '../../components';
+import './MyGigs.scss';
 
 const MyGigs = () => {
   const user = useRecoilValue(userState);
@@ -46,7 +47,7 @@ const MyGigs = () => {
     <div className='myGigs'>
       {
         isLoading
-          ? '...loading'
+          ? <div className='loader'> <Loader size={35} /> </div>
           : error
             ? 'Something went wrong'
             : <div className="container">
