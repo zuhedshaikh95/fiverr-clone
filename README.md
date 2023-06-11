@@ -219,9 +219,6 @@ e.g. 'development' for local and 'production' for production
 `VITE_API_URL`
 e.g. http://localhost:3000/api or production deployed server link
 
-`VITE_PAYMENT_SUCCESS_REDIRECT`
-e.g. http://localhost:3000/success or production deployed frontend link
-
 `VITE_STRIPE_PUBLISHABLE_KEY`
 e.g. Publishable key from stripe dashboard
 
