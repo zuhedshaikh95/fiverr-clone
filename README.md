@@ -117,11 +117,9 @@ As for the front end, the UI has only been built using JSX and Scss. For state m
 
 <br />
 
-
 ## Getting Started
 
 This project was built using React, Redux, Sass, HTML, JavaScript, Rest API, Node JS, Express and MongoDB with JWT and Stripe integration. It is an freelance outsourcing web application and for running on your local environment you should follow these guidelines.
-
 
 ### Prerequisites
 
@@ -131,9 +129,7 @@ This project was built using React, Redux, Sass, HTML, JavaScript, Rest API, Nod
 
 ### Setup
 
-
 The project repository can be found in [GitHub link](https://github.com/zuhedshaikh95/fiverr-clone) or just clone the project using this command.
-
 
 ```
 Using HTTPS
@@ -141,12 +137,11 @@ Using HTTPS
 # git clone https://github.com/zuhedshaikh95/fiverr-clone.git
 ```
 
-+ Open terminal on your workspace with
+- Open terminal on your workspace with
 
 ```
 cd /home/workspace/fiverr-clone
 ```
-
 
 ## Install
 
@@ -156,13 +151,11 @@ Check that you have node and npm installed
 
 To check if you have Node.js installed, run this command in your terminal:
 
-
 ```
 node -v
 ```
 
 To confirm that you have npm installed you can run this command in your terminal:
-
 
 ```
 npm -v
@@ -170,14 +163,11 @@ npm -v
 
 To confirm that you have MongoDB installed you can run this command in your terminal:
 
-
 ```
 mongo -v
 ```
 
-
 To install all the dependences of the project, run the following command:
-
 
 ```
 cd client
@@ -191,7 +181,6 @@ cd server
 npm install
 ```
 
-
 To run the application got to the client folder and run the following command:
 
 ```
@@ -203,6 +192,7 @@ npm run dev
 To run this project, you will need to add the following environment variables to your .env file
 
 ### Server
+
 `JWT_SECRET`
 e.g. this_is_secret_123
 
@@ -216,11 +206,18 @@ e.g. Secret key from stripe dashboard
 e.g. 'development' for local and 'production' for production
 
 ### Client
+
 `VITE_API_URL`
 e.g. http://localhost:3000/api or production deployed server link
 
 `VITE_STRIPE_PUBLISHABLE_KEY`
 e.g. Publishable key from stripe dashboard
+
+`CLOUDINARY_ENV`
+e.g Cloudinary environment string from your cloudinary dashboard
+
+`CLOUDINARY_PRESET`
+e.g. Cloudinary preset name from your cloudinary dashboard settings -> Uploads
 
 ### Tools used on this project
 
@@ -234,6 +231,7 @@ e.g. Publishable key from stripe dashboard
 ## Contact
 
 ### Let's connect 🤝 <br />
+
 [![linkedin](https://img.shields.io/badge/Zuhed_Shaikh-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/zuhedshaikh95/)
 [![GitHub](https://img.shields.io/badge/Zuhed_Shaikh-20232A?style=for-the-badge&logo=Github&logoColor=white)](https://github.com/zuhedshaikh95)
 
